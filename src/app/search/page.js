@@ -15,8 +15,14 @@ export default function ProductSearch() {
   // 商品検索APIを呼び出す関数
   const searchProduct = async () => {
     try {
-      // FastAPIサーバーのフルURLを指定
-      const response = await fetch(`http://localhost:8000/products/${code}`);
+      // FastAPIサーバーの本番URLを指定
+      const response = await fetch(`https://tech0-gen-7-step4-studentwebapp-pos-40-gjf6e0fafecrcnfm.eastus-01.azurewebsites.net/products/${code}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',  // 認証情報を含める
+      });
       
       if (response.ok) {
         const data = await response.json();
