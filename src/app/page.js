@@ -1,7 +1,14 @@
 "use client";
 
 import React, { useState } from "react";
-import { Plus, Minus, ShoppingCart, CreditCard, Search } from "lucide-react";
+import {
+  Plus,
+  Minus,
+  ShoppingCart,
+  CreditCard,
+  Search,
+  Camera,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -12,6 +19,14 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { BarcodeScanner } from "@/components/barcode-scanner";
 
 export default function POSRegister() {
   const [cart, setCart] = useState([]);
@@ -20,11 +35,12 @@ export default function POSRegister() {
   const [product, setProduct] = useState(null);
   const [error, setError] = useState(null);
   const [quantity, setQuantity] = useState(1);
+  const [isScanning, setIsScanning] = useState(false);
 
-  const searchProduct = async () => {
+  const searchProduct = async (searchCode) => {
     try {
       const response = await fetch(
-        `https://tech0-gen-7-step4-studentwebapp-pos-40-gjf6e0fafecrcnfm.eastus-01.azurewebsites.net/products/${code}`,
+        `https://tech0-gen-7-step4-studentwebapp-pos-40-gjf6e0fafecrcnfm.eastus-01.azurewebsites.net/products/${searchCode}`,
         {
           method: "GET",
           headers: {
@@ -51,6 +67,18 @@ export default function POSRegister() {
     } catch (error) {
       setProduct(null);
       setError("エラーが発生しました");
+    }
+  };
+
+  const handleSearch = () => {
+    searchProduct(code);
+  };
+
+  const handleScan = (result) => {
+    if (result) {
+      setCode(result);
+      searchProduct(result);
+      setIsScanning(false);
     }
   };
 
@@ -121,9 +149,22 @@ export default function POSRegister() {
                 placeholder="商品コードを入力"
                 className="flex-grow"
               />
-              <Button onClick={searchProduct}>
+              <Button onClick={handleSearch}>
                 <Search className="mr-2 h-4 w-4" /> 検索
               </Button>
+              <Dialog open={isScanning} onOpenChange={setIsScanning}>
+                <DialogTrigger asChild>
+                  <Button variant="outline">
+                    <Camera className="mr-2 h-4 w-4" /> スキャン
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[425px]">
+                  <DialogHeader>
+                    <DialogTitle>バーコードスキャン</DialogTitle>
+                  </DialogHeader>
+                  <BarcodeScanner onResult={handleScan} />
+                </DialogContent>
+              </Dialog>
             </div>
             {error && <p className="text-red-500 mb-4">{error}</p>}
             {product && (
