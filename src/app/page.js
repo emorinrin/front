@@ -27,6 +27,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { BarcodeScanner } from "@/components/barcode-scanner";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 export default function POSRegister() {
   const [cart, setCart] = useState([]);
@@ -36,8 +37,10 @@ export default function POSRegister() {
   const [error, setError] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [isScanning, setIsScanning] = useState(false);
+  const [feedback, setFeedback] = useState(null);
 
   const searchProduct = async (searchCode) => {
+    console.log("Searching for product with code:", searchCode);
     try {
       const response = await fetch(
         `https://tech0-gen-7-step4-studentwebapp-pos-40-gjf6e0fafecrcnfm.eastus-01.azurewebsites.net/products/${searchCode}`,
@@ -50,36 +53,54 @@ export default function POSRegister() {
         }
       );
 
+      console.log("API response status:", response.status);
       if (response.ok) {
         const data = await response.json();
+        console.log("API response data:", data);
         if (data) {
           setProduct(data);
           setError(null);
           setQuantity(1);
+          setFeedback(null); // 成功時はフィードバックを null に設定
         } else {
           setProduct(null);
           setError("商品が見つかりませんでした");
+          setFeedback({
+            type: "error",
+            message: "商品が見つかりませんでした。",
+          });
         }
       } else {
         setProduct(null);
         setError("商品が見つかりませんでした");
+        setFeedback({
+          type: "error",
+          message: "商品の検索中にエラーが発生しました。",
+        });
       }
     } catch (error) {
+      console.error("Product search error:", error);
       setProduct(null);
       setError("エラーが発生しました");
+      setFeedback({ type: "error", message: "予期せぬエラーが発生しました。" });
     }
   };
 
   const handleSearch = () => {
+    if (code.trim() === "") {
+      setFeedback({ type: "error", message: "商品コードを入力してください。" });
+      return;
+    }
     searchProduct(code);
   };
 
   const handleScan = (result) => {
+    console.log("Scan result:", result);
     if (result) {
-      console.log("Scanned code:", result);
       setCode(result);
       searchProduct(result);
       setIsScanning(false);
+      // スキャン成功時のフィードバックを削除
     }
   };
 
@@ -101,6 +122,7 @@ export default function POSRegister() {
       setProduct(null);
       setCode("");
       setQuantity(1);
+      setFeedback(null); // カートに追加成功時はフィードバックを null に設定
     }
   };
 
@@ -125,13 +147,14 @@ export default function POSRegister() {
   const handleCheckout = () => {
     const cashAmount = parseFloat(cash);
     if (isNaN(cashAmount) || cashAmount < total) {
-      alert("無効な金額です");
+      setFeedback({ type: "error", message: "無効な金額です。" });
       return;
     }
     const change = cashAmount - total;
-    alert(
-      `ご購入ありがとうございます！\n合計: ¥${total}\n受取金額: ¥${cashAmount}\nお釣り: ¥${change}`
-    );
+    setFeedback({
+      type: "success",
+      message: `ご購入ありがとうございます！\n合計: ¥${total}\n受取金額: ¥${cashAmount}\nお釣り: ¥${change}`,
+    });
     setCart([]);
     setCash("");
   };
@@ -161,13 +184,18 @@ export default function POSRegister() {
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-[425px]">
                   <DialogHeader>
-                    <DialogTitle>バーコードスキャン</DialogTitle>
+                    <DialogTitle>バーコード/QRコードスキャン</DialogTitle>
                   </DialogHeader>
                   <BarcodeScanner onResult={handleScan} />
                 </DialogContent>
               </Dialog>
             </div>
-            {error && <p className="text-red-500 mb-4">{error}</p>}
+            {feedback && feedback.type === "error" && (
+              <Alert className="mb-4 bg-red-100">
+                <AlertTitle>エラー</AlertTitle>
+                <AlertDescription>{feedback.message}</AlertDescription>
+              </Alert>
+            )}
             {product && (
               <Card className="mb-4">
                 <CardHeader>
