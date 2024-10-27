@@ -76,6 +76,7 @@ export default function POSRegister() {
 
   const handleScan = (result) => {
     if (result) {
+      console.log("Scanned code:", result);
       setCode(result);
       searchProduct(result);
       setIsScanning(false);
