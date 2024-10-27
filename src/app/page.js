@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Plus, Minus, ShoppingCart, CreditCard } from "lucide-react";
+import { Plus, Minus, ShoppingCart, CreditCard, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -13,48 +13,85 @@ import {
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
-// サンプル商品データ
-const products = [
-  { id: 1, name: "コーヒー", price: 300 },
-  { id: 2, name: "サンドイッチ", price: 500 },
-  { id: 3, name: "サラダ", price: 450 },
-  { id: 4, name: "ケーキ", price: 400 },
-  { id: 5, name: "お茶", price: 250 },
-];
-
 export default function POSRegister() {
   const [cart, setCart] = useState([]);
   const [cash, setCash] = useState("");
+  const [code, setCode] = useState("");
+  const [product, setProduct] = useState(null);
+  const [error, setError] = useState(null);
+  const [quantity, setQuantity] = useState(1);
 
-  const addToCart = (product) => {
-    setCart((currentCart) => {
-      const existingItem = currentCart.find((item) => item.id === product.id);
-      if (existingItem) {
-        return currentCart.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        );
+  const searchProduct = async () => {
+    try {
+      const response = await fetch(
+        `https://tech0-gen-7-step4-studentwebapp-pos-40-gjf6e0fafecrcnfm.eastus-01.azurewebsites.net/products/${code}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        if (data) {
+          setProduct(data);
+          setError(null);
+          setQuantity(1);
+        } else {
+          setProduct(null);
+          setError("商品が見つかりませんでした");
+        }
+      } else {
+        setProduct(null);
+        setError("商品が見つかりませんでした");
       }
-      return [...currentCart, { ...product, quantity: 1 }];
-    });
+    } catch (error) {
+      setProduct(null);
+      setError("エラーが発生しました");
+    }
+  };
+
+  const addToCart = () => {
+    if (product && quantity > 0) {
+      setCart((currentCart) => {
+        const existingItem = currentCart.find(
+          (item) => item.PRD_ID === product.PRD_ID
+        );
+        if (existingItem) {
+          return currentCart.map((item) =>
+            item.PRD_ID === product.PRD_ID
+              ? { ...item, quantity: item.quantity + quantity }
+              : item
+          );
+        }
+        return [...currentCart, { ...product, quantity }];
+      });
+      setProduct(null);
+      setCode("");
+      setQuantity(1);
+    }
   };
 
   const removeFromCart = (productId) => {
     setCart((currentCart) => {
-      const existingItem = currentCart.find((item) => item.id === productId);
+      const existingItem = currentCart.find(
+        (item) => item.PRD_ID === productId
+      );
       if (existingItem && existingItem.quantity > 1) {
         return currentCart.map((item) =>
-          item.id === productId
+          item.PRD_ID === productId
             ? { ...item, quantity: item.quantity - 1 }
             : item
         );
       }
-      return currentCart.filter((item) => item.id !== productId);
+      return currentCart.filter((item) => item.PRD_ID !== productId);
     });
   };
 
-  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const total = cart.reduce((sum, item) => sum + item.PRICE * item.quantity, 0);
 
   const handleCheckout = () => {
     const cashAmount = parseFloat(cash);
@@ -75,30 +112,46 @@ export default function POSRegister() {
       <div className="flex-1 flex flex-col overflow-hidden">
         <main className="flex-1 flex">
           <div className="w-2/3 p-6 overflow-auto">
-            <h2 className="text-2xl font-bold mb-4">商品一覧</h2>
-            <div className="grid grid-cols-2 gap-4">
-              {products.map((product) => (
-                <Card
-                  key={product.id}
-                  className="flex flex-col justify-between"
-                >
-                  <CardHeader>
-                    <CardTitle>{product.name}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-2xl font-bold">¥{product.price}</p>
-                  </CardContent>
-                  <CardFooter>
-                    <Button
-                      onClick={() => addToCart(product)}
-                      className="w-full"
-                    >
-                      <Plus className="mr-2 h-4 w-4" /> カートに追加
-                    </Button>
-                  </CardFooter>
-                </Card>
-              ))}
+            <h2 className="text-2xl font-bold mb-4">商品検索</h2>
+            <div className="flex gap-2 mb-4">
+              <Input
+                type="text"
+                value={code}
+                onChange={(e) => setCode(e.target.value)}
+                placeholder="商品コードを入力"
+                className="flex-grow"
+              />
+              <Button onClick={searchProduct}>
+                <Search className="mr-2 h-4 w-4" /> 検索
+              </Button>
             </div>
+            {error && <p className="text-red-500 mb-4">{error}</p>}
+            {product && (
+              <Card className="mb-4">
+                <CardHeader>
+                  <CardTitle>{product.NAME}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-2xl font-bold">¥{product.PRICE}</p>
+                  <p>商品コード: {product.CODE}</p>
+                  <p>商品一意キー: {product.PRD_ID}</p>
+                </CardContent>
+                <CardFooter className="flex justify-between">
+                  <Input
+                    type="number"
+                    value={quantity}
+                    onChange={(e) =>
+                      setQuantity(Math.max(1, parseInt(e.target.value)))
+                    }
+                    className="w-20"
+                    min="1"
+                  />
+                  <Button onClick={addToCart}>
+                    <Plus className="mr-2 h-4 w-4" /> カートに追加
+                  </Button>
+                </CardFooter>
+              </Card>
+            )}
           </div>
           <div className="w-1/3 bg-white p-6 flex flex-col">
             <h2 className="text-2xl font-bold mb-4 flex items-center">
@@ -107,18 +160,18 @@ export default function POSRegister() {
             <ScrollArea className="flex-1">
               {cart.map((item) => (
                 <div
-                  key={item.id}
+                  key={item.PRD_ID}
                   className="flex justify-between items-center mb-2"
                 >
                   <span>
-                    {item.name} x {item.quantity}
+                    {item.NAME} x {item.quantity}
                   </span>
                   <div>
-                    <span className="mr-2">¥{item.price * item.quantity}</span>
+                    <span className="mr-2">¥{item.PRICE * item.quantity}</span>
                     <Button
                       variant="outline"
                       size="icon"
-                      onClick={() => removeFromCart(item.id)}
+                      onClick={() => removeFromCart(item.PRD_ID)}
                     >
                       <Minus className="h-4 w-4" />
                     </Button>
