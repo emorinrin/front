@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import StockpileRegistrationBarcodeRead from "@/components/StockpileRegistrationBarcodeRead";
+import StockpileRegistrationCompletion from "@/components/StockpileRegistrationCompletion";
 
 export default function Component() {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
