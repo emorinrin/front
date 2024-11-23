@@ -1,6 +1,6 @@
 "use client";
 
-import Header from "@/components/StockpileRegistrationBarcodeRead";
+import Header from "@/components/StockpileRegistrationCompletion";
 
 export default function Component() {
   return (
@@ -10,6 +10,3 @@ export default function Component() {
     </div>
   );
 }
-
-
-
