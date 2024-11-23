@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Header from "@/components/header";
-import StockpileRegistrationBarcodeRead from "@/components/StockpileRegistrationCompletion";
+import StockpileRegistrationBarcodeRead from "@/components/StockpileRegistrationBarcodeRead";
 import StockpileRegistrationCompletion from "@/components/StockpileRegistrationCompletion";
 
 export default function Component() {
