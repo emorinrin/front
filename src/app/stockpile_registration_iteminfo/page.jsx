@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import Header from "@/components/header";
-import StockpileRegistrationBarcodeRead from "@/components/StockpileRegistrationBarcodeRead";
+import StockpileRegistrationBarcodeRead from "@/components/StockpileRegistrationCompletion";
+import StockpileRegistrationCompletion from "@/components/StockpileRegistrationCompletion";
 
 export default function Component() {
   const [formData, setFormData] = useState({
@@ -38,16 +39,25 @@ export default function Component() {
     }
   };
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
+  // Modal for barcode
+  const [BarcodeModalOpen, setBarcodeModalOpen] = useState(false);
   const handleCameraClick = () => {
-    setIsModalOpen(true);
+    setBarcodeModalOpen(true);
+  };
+  const handleBarcodeCloseModal = () => {
+    setBarcodeModalOpen(false);
   };
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
+  // Modal for completion
+  const [CompletionModalOpen, setCompletionModalOpen] = useState(false);
+  const handleCompletionClick = () => {
+    setCompletionModalOpen(true);
+  };
+  const handleCompletionCloseModal = () => {
+    setCompletionModalOpen(false);
   };
 
+  // Handle form input
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -60,7 +70,7 @@ export default function Component() {
     <form onSubmit={handleSubmit} className="max-w-md mx-auto p-4 space-y-4">
       {/* Header component */}
       <Header />
-      <h2 className="text-xl font-bold">備品情報登録</h2>
+      <p>バーコードから商品情報を読み取り可能です</p>
 
       <div className="space-y-2">
         <button
@@ -80,8 +90,10 @@ export default function Component() {
           onChange={(e) => console.log(e.target.files[0])}
           className="w-full p-2 rounded bg-gray-100 border border-gray-200"
         />
+        <p>登録情報を入力してください</p>
+
         <label htmlFor="name" className="block text-sm">
-          情報登録名
+          備蓄品名
         </label>
         <input
           id="name"
@@ -110,7 +122,7 @@ export default function Component() {
       </div>
       <div className="space-y-2">
         <label htmlFor="date" className="block text-sm">
-          買い物時期
+          賞味期限
         </label>
         <input
           id="date"
@@ -141,22 +153,36 @@ export default function Component() {
         </select>
       </div>
       <button
-        type="submit"
+        type="button"
+        onClick={handleCompletionClick}
         className="w-full p-2 rounded bg-black text-white hover:bg-black/90 transition-colors"
       >
-        保存
+        登録・更新
       </button>
 
-      {isModalOpen && (
+      {BarcodeModalOpen && (
         <div
           className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
-          onClick={handleCloseModal}
+          onClick={handleBarcodeCloseModal}
         >
           <div
             className="bg-white p-4 rounded shadow-lg"
             onClick={(e) => e.stopPropagation()}
           >
             <StockpileRegistrationBarcodeRead />
+          </div>
+        </div>
+      )}
+      {CompletionModalOpen && (
+        <div
+          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+          onClick={handleCompletionCloseModal}
+        >
+          <div
+            className="bg-white p-4 rounded shadow-lg"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <StockpileRegistrationCompletion />
           </div>
         </div>
       )}
