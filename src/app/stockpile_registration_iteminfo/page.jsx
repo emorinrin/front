@@ -1,11 +1,59 @@
 "use client";
 
 import { useState } from "react";
-import Header from "@/components/header";
-import StockpileRegistrationBarcodeRead from "@/components/StockpileRegistrationBarcodeRead";
-import StockpileRegistrationCompletion from "@/components/StockpileRegistrationCompletion";
 
 export default function Component() {
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
+  const fetchData = async () => {
+    try {
+      // リクエストボディを取得
+      const requestBody = await request.json(); // 修正ポイント
+      console.log("受信したリクエストボディ:", requestBody);
+
+      if (
+        !requestBody.organization_id ||
+        !Array.isArray(requestBody.purchases)
+      ) {
+        console.error("リクエストデータ形式が不正です:", requestBody);
+        return response.json(
+          { error: "リクエストデータ形式が不正です。" },
+          { status: 400 }
+        );
+      }
+
+      const response = await fetch(`${apiUrl}/ReadStockpileInfo/`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestBody),
+        cache: "no-cache",
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error("外部APIエラー:", errorText);
+        return response.json(
+          { error: `外部APIエラー: ${errorText}` },
+          { status: response.status }
+        );
+      }
+
+      const data = await response.json();
+      console.log("外部APIレスポンス:", data);
+      return response.json(data);
+    } catch (error) {
+      console.error("サーバー内部エラー:", error);
+      return response.json(
+        { error: "サーバー内部エラーが発生しました。" },
+        { status: 500 }
+      );
+    }
+  };
+
+  fetchData();
+
   const [formData, setFormData] = useState({
     name: "",
     quantity: "",
@@ -18,8 +66,8 @@ export default function Component() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("/api/submit", {
-        method: "POST",
+      const response = await fetch(`${apiUrl}/PostStockpileInfo/`, {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
@@ -76,8 +124,6 @@ export default function Component() {
 
   return (
     <form onSubmit={handleSubmit} className="max-w-md mx-auto p-4 space-y-4">
-      {/* Header component */}
-      <Header />
       <p>バーコードから商品情報を読み取り可能です</p>
 
       <div className="space-y-2">
@@ -178,7 +224,7 @@ export default function Component() {
         </select>
       </div>
       <button
-        type="button"
+        type="submit"
         onClick={handleCompletionClick}
         className="w-full p-2 rounded bg-black text-white hover:bg-black/90 transition-colors"
       >

@@ -14,26 +14,12 @@ import { useRouter } from "next/navigation"; // ルーティング用フック
 export default function SnackRegistrationApp() {
   const router = useRouter(); // ルーター機能を初期化
   const [step, setStep] = useState(0); // 現在のステップ（ページ）の状態
-  const [itemName, setItemName] = useState(""); // 商品名（手動入力またはスキャン結果）
-  const [barcodeResult, setBarcodeResult] = useState(""); // スキャナからの読み取り結果
-  const [quantity, setQuantity] = useState(0); // 商品の数量
-  const [items, setItems] = useState([]); // 商品リスト（複数商品を保持）
+  const [itemNumber, setItemNumber] = useState(""); // 商品番号（手動入力またはスキャン結果）
   const [showScanner, setShowScanner] = useState(true); // スキャナの表示状態
 
-  // 商品をリストに追加する関数
-  const addItem = () => {
-    setItems([
-      ...items,
-      { name: itemName || barcodeResult, quantity: quantity }, // 手動入力優先、無ければスキャン結果
-    ]);
-    setItemName(""); // 入力欄をリセット
-    setQuantity(0); // 数量をリセット
-    setBarcodeResult(""); // スキャン結果をリセット
-  };
-
-  // スキャン結果を商品名に反映する関数
-  const handleScanResult = (productName) => {
-    setItemName(productName); // 商品名を更新
+  // スキャン結果を商品番号に反映する関数
+  const handleScanResult = (productNumber) => {
+    setItemNumber(productNumber); // 商品番号を更新
   };
 
   // ページ読み込み時にスキャナを自動的に起動
@@ -69,8 +55,8 @@ export default function SnackRegistrationApp() {
 
               {/* 商品名入力 */}
               <Input
-                value={itemName}
-                onChange={(e) => setItemName(e.target.value)}
+                value={itemNumber}
+                onChange={(e) => setItemNumber(e.target.value)}
                 placeholder="品名(手動入力も可能)"
                 className="text-xl h-16 px-6 w-full"
               />
