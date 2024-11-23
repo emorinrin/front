@@ -1,4 +1,3 @@
-// BarcodeScanner.jsx
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import { BrowserMultiFormatReader, NotFoundException } from "@zxing/library";
 
@@ -9,6 +8,7 @@ export default function BarcodeScanner({ onScan }) {
   const handleScan = useCallback(
     async (barcode) => {
       try {
+        console.log("スキャン成功:", barcode); // デバッグ用ログ
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_API_URL}/get_product_name?barcode=${barcode}`
         );
@@ -28,17 +28,39 @@ export default function BarcodeScanner({ onScan }) {
 
   useEffect(() => {
     const codeReader = new BrowserMultiFormatReader();
-
-    codeReader
-      .decodeFromVideoDevice(null, videoRef.current, (result, err) => {
-        if (result) {
-          handleScan(result.getText());
-          codeReader.reset();
-        } else if (err && !(err instanceof NotFoundException)) {
-          console.error("スキャンエラー:", err);
+    const startScanner = async () => {
+      try {
+        const videoInputDevices = await codeReader.listVideoInputDevices();
+        if (videoInputDevices.length === 0) {
+          throw new Error("カメラデバイスが見つかりません");
         }
-      })
-      .catch((err) => console.error("初期化エラー:", err));
+
+        await codeReader.decodeFromVideoDevice(
+          videoInputDevices[0].deviceId, // 最初のカメラデバイスを使用
+          videoRef.current,
+          (result, err) => {
+            if (result) {
+              handleScan(result.getText());
+            } else if (err && !(err instanceof NotFoundException)) {
+              console.error("スキャンエラー:", err);
+            }
+          }
+        );
+      } catch (err) {
+        console.error("カメラ初期化エラー:", err.message);
+        if (err.name === "NotAllowedError") {
+          setError(
+            "カメラへのアクセスが拒否されました。ブラウザの設定を確認してください。"
+          );
+        } else if (err.name === "NotFoundError") {
+          setError("使用可能なカメラが見つかりません。");
+        } else {
+          setError(err.message || "不明なエラーが発生しました");
+        }
+      }
+    };
+
+    startScanner();
 
     return () => {
       codeReader.reset();
@@ -46,9 +68,17 @@ export default function BarcodeScanner({ onScan }) {
   }, [handleScan]);
 
   return (
-    <div>
-      <video ref={videoRef} style={{ width: "100%", height: "300px" }} />
-      {error && <div style={{ color: "red" }}>エラー: {error}</div>}
+    <div style={{ position: "relative", width: "100%", height: "300px" }}>
+      <video
+        ref={videoRef}
+        style={{
+          width: "100%",
+          height: "300px",
+          objectFit: "cover", // カメラ映像を適切に表示
+          border: "2px solid black",
+        }}
+      />
+      {error && <div style={{ color: "red", marginTop: "8px" }}>{error}</div>}
     </div>
   );
 }
