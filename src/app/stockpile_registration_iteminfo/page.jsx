@@ -13,6 +13,8 @@ export default function Component() {
     category: "",
   });
 
+  const [uploadedFile, setUploadedFile] = useState(null); // アップロードされたファイルの状態を管理
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -24,7 +26,6 @@ export default function Component() {
         body: JSON.stringify(formData),
       });
       if (response.ok) {
-        // Reset form after successful submission
         setFormData({
           name: "",
           quantity: "",
@@ -36,6 +37,13 @@ export default function Component() {
     } catch (error) {
       console.error("Error:", error);
       alert("エラーが発生しました");
+    }
+  };
+
+  const handleFileUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setUploadedFile(file); // ファイルを状態に設定
     }
   };
 
@@ -87,9 +95,26 @@ export default function Component() {
           id="file"
           name="file"
           type="file"
-          onChange={(e) => console.log(e.target.files[0])}
+          onChange={handleFileUpload}
           className="w-full p-2 rounded bg-gray-100 border border-gray-200"
         />
+
+        {/* ファイルがアップロードされていれば表示 */}
+        {uploadedFile && (
+          <div className="mt-4">
+            <p>アップロードされたファイル:</p>
+            {uploadedFile.type.startsWith("image/") ? (
+              <img
+                src={URL.createObjectURL(uploadedFile)}
+                alt="アップロード画像プレビュー"
+                className="w-full h-auto max-h-64 object-contain border rounded"
+              />
+            ) : (
+              <p>{uploadedFile.name}</p> // 画像以外の場合はファイル名を表示
+            )}
+          </div>
+        )}
+
         <p>登録情報を入力してください</p>
 
         <label htmlFor="name" className="block text-sm">
