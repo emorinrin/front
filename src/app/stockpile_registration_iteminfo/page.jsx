@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Header from "@/components/header";
 import StockpileRegistrationBarcodeRead from "@/components/StockpileRegistrationBarcodeRead";
 import StockpileRegistrationCompletion from "@/components/StockpileRegistrationCompletion";
 
@@ -126,6 +127,8 @@ export default function Component() {
 
   return (
     <form onSubmit={handleSubmit} className="max-w-md mx-auto p-4 space-y-4">
+      {/* Header component */}
+      <Header />
       <p>バーコードから商品情報を読み取り可能です</p>
 
       <div className="space-y-2">
