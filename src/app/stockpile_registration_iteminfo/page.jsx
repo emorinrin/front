@@ -6,57 +6,62 @@ import StockpileRegistrationBarcodeRead from "@/components/StockpileRegistration
 import StockpileRegistrationCompletion from "@/components/StockpileRegistrationCompletion";
 
 export default function Component() {
+  // 環境変数からAPIのURLを取得
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
+  // データを外部APIから取得する関数
   const fetchData = async () => {
     try {
-      // リクエストボディを取得
-      const requestBody = await request.json(); // 修正ポイント
-      console.log("受信したリクエストボディ:", requestBody);
+      // 仮のリクエストボディ（実際のデータに置き換えてください）
+      const requestBody = {
+        organization_id: "12345", // ここに実際の組織IDを設定
+        purchases: [{ item: "example_item", quantity: 10 }], // 購入データを設定
+      };
 
+      console.log("送信するリクエストボディ:", requestBody);
+
+      // リクエストボディのバリデーション（形式が正しいかチェック）
       if (
         !requestBody.organization_id ||
         !Array.isArray(requestBody.purchases)
       ) {
         console.error("リクエストデータ形式が不正です:", requestBody);
-        return response.json(
-          { error: "リクエストデータ形式が不正です。" },
-          { status: 400 }
-        );
+        throw new Error("リクエストデータ形式が不正です");
       }
 
+      // APIにリクエストを送信
       const response = await fetch(`${apiUrl}/ReadStockpileInfo/`, {
-        method: "GET",
+        method: "POST", // 必要に応じてPOSTメソッドを使用
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json", // JSON形式のリクエストを送信
         },
-        body: JSON.stringify(requestBody),
-        cache: "no-cache",
+        body: JSON.stringify(requestBody), // リクエストボディをJSON形式に変換
+        cache: "no-cache", // キャッシュを使用しない
       });
 
+      // レスポンスのステータスを確認
       if (!response.ok) {
         const errorText = await response.text();
         console.error("外部APIエラー:", errorText);
-        return response.json(
-          { error: `外部APIエラー: ${errorText}` },
-          { status: response.status }
-        );
+        throw new Error(`外部APIエラー: ${errorText}`);
       }
 
+      // レスポンスデータをJSON形式で取得
       const data = await response.json();
       console.log("外部APIレスポンス:", data);
-      return response.json(data);
+
+      // 必要に応じて取得したデータを返す
+      return data;
     } catch (error) {
       console.error("サーバー内部エラー:", error);
-      return response.json(
-        { error: "サーバー内部エラーが発生しました。" },
-        { status: 500 }
-      );
+      throw new Error("サーバー内部エラーが発生しました");
     }
   };
 
+  // ページロード時にfetchDataを実行
   fetchData();
 
+  // フォームデータの状態を管理
   const [formData, setFormData] = useState({
     name: "",
     quantity: "",
@@ -64,32 +69,35 @@ export default function Component() {
     category: "",
   });
 
-  const [uploadedFile, setUploadedFile] = useState(null); // アップロードされたファイルの状態を管理
+  // アップロードされたファイルの状態を管理
+  const [uploadedFile, setUploadedFile] = useState(null);
 
+  // フォーム送信処理
   const handleSubmit = async (e) => {
-    e.preventDefault();
-  
+    e.preventDefault(); // ページリロードを防止
+
     try {
       // ファイルが選択されている場合のみアップロード
       if (uploadedFile) {
         const fileFormData = new FormData();
         fileFormData.append("file", uploadedFile);
-  
+
+        // ファイルをAPIにアップロード
         const fileResponse = await fetch(`${apiUrl}/PostStockpileImage`, {
           method: "POST",
           body: fileFormData,
         });
-  
+
         if (!fileResponse.ok) {
           alert("ファイルのアップロードに失敗しました");
           console.error("ファイルアップロードエラー:", fileResponse.statusText);
           return;
         }
-  
+
         alert("ファイルが正常にアップロードされました");
       }
-  
-      // 登録情報の送信
+
+      // 登録情報をAPIに送信
       const response = await fetch(`${apiUrl}/PutStockpileInfo/`, {
         method: "PUT",
         headers: {
@@ -97,7 +105,8 @@ export default function Component() {
         },
         body: JSON.stringify(formData),
       });
-  
+
+      // サーバー応答を確認
       if (response.ok) {
         setFormData({
           name: "",
@@ -105,7 +114,7 @@ export default function Component() {
           date: "",
           category: "",
         });
-        setUploadedFile(null); // ファイル選択状態をリセット
+        setUploadedFile(null);
         alert("送信成功");
       } else {
         console.error("サーバーエラー:", response.statusText);
@@ -117,14 +126,15 @@ export default function Component() {
     }
   };
 
+  // ファイル選択時の処理
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setUploadedFile(file); // ファイルを状態に設定
+      setUploadedFile(file); // アップロードされたファイルを保存
     }
   };
 
-  // Modal for barcode
+  // モーダル操作用の状態と関数
   const [BarcodeModalOpen, setBarcodeModalOpen] = useState(false);
   const handleCameraClick = () => {
     setBarcodeModalOpen(true);
@@ -133,7 +143,6 @@ export default function Component() {
     setBarcodeModalOpen(false);
   };
 
-  // Modal for completion
   const [CompletionModalOpen, setCompletionModalOpen] = useState(false);
   const handleCompletionClick = () => {
     setCompletionModalOpen(true);
@@ -142,7 +151,7 @@ export default function Component() {
     setCompletionModalOpen(false);
   };
 
-  // Handle form input
+  // 入力フォームの値を管理
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
