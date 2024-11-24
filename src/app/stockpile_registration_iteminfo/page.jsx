@@ -68,14 +68,36 @@ export default function Component() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+  
     try {
-      const response = await fetch(`${apiUrl}/PostStockpileInfo/`, {
+      // ファイルが選択されている場合のみアップロード
+      if (uploadedFile) {
+        const fileFormData = new FormData();
+        fileFormData.append("file", uploadedFile);
+  
+        const fileResponse = await fetch(`${apiUrl}/PostStockpileImage`, {
+          method: "POST",
+          body: fileFormData,
+        });
+  
+        if (!fileResponse.ok) {
+          alert("ファイルのアップロードに失敗しました");
+          console.error("ファイルアップロードエラー:", fileResponse.statusText);
+          return;
+        }
+  
+        alert("ファイルが正常にアップロードされました");
+      }
+  
+      // 登録情報の送信
+      const response = await fetch(`${apiUrl}/PutStockpileInfo/`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
+  
       if (response.ok) {
         setFormData({
           name: "",
@@ -83,10 +105,14 @@ export default function Component() {
           date: "",
           category: "",
         });
+        setUploadedFile(null); // ファイル選択状態をリセット
         alert("送信成功");
+      } else {
+        console.error("サーバーエラー:", response.statusText);
+        alert("登録情報の送信に失敗しました");
       }
     } catch (error) {
-      console.error("Error:", error);
+      console.error("エラー:", error);
       alert("エラーが発生しました");
     }
   };
