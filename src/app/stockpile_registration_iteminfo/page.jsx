@@ -1,65 +1,74 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "@/components/header";
 import StockpileRegistrationBarcodeRead from "@/components/StockpileRegistrationBarcodeRead";
 import StockpileRegistrationCompletion from "@/components/StockpileRegistrationCompletion";
 
-export default function Component() {
-  // 環境変数からAPIのURLを取得
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+// 環境変数からAPIのURLを取得
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+const jan_code = 4902181102480;
 
-  // データを外部APIから取得する関数
-  const fetchData = async () => {
-    try {
-      // 仮のリクエストボディ（実際のデータに置き換えてください）
-      const requestBody = {
-        organization_id: "12345", // ここに実際の組織IDを設定
-        purchases: [{ item: "example_item", quantity: 10 }], // 購入データを設定
-      };
+// データを外部APIから取得する関数
+const fetchData = async () => {
+  try {
+    // 仮のリクエストボディ（実際のデータに置き換えてください）
+    const requestBody = {
+      jan_code: 4902181102480,
+      name: "test",
+      quantity: 0,
+      category: "test",
+      date: "2022-12-31",
+    };
 
-      console.log("送信するリクエストボディ:", requestBody);
+    // リクエストボディのバリデーション（形式が正しいかチェック）
+    if (
+      !requestBody.jan_code ||
+      !requestBody.name ||
+      !requestBody.category ||
+      !requestBody.date
+    ) {
+      console.error("リクエストデータ形式が不正です:", requestBody);
+      throw new Error("リクエストデータ形式が不正です");
+    }
 
-      // リクエストボディのバリデーション（形式が正しいかチェック）
-      if (
-        !requestBody.organization_id ||
-        !Array.isArray(requestBody.purchases)
-      ) {
-        console.error("リクエストデータ形式が不正です:", requestBody);
-        throw new Error("リクエストデータ形式が不正です");
-      }
-
-      // APIにリクエストを送信
-      const response = await fetch(`${apiUrl}/ReadStockpileInfo/`, {
-        method: "POST", // 必要に応じてPOSTメソッドを使用
+    // APIにリクエストを送信
+    const response = await fetch(
+      `${apiUrl}/ReadStockpileInfo/?jan_code=${jan_code}`,
+      {
+        method: "GET", // GETメソッドを使用
         headers: {
           "Content-Type": "application/json", // JSON形式のリクエストを送信
         },
-        body: JSON.stringify(requestBody), // リクエストボディをJSON形式に変換
-        cache: "no-cache", // キャッシュを使用しない
-      });
-
-      // レスポンスのステータスを確認
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error("外部APIエラー:", errorText);
-        throw new Error(`外部APIエラー: ${errorText}`);
       }
+    );
 
-      // レスポンスデータをJSON形式で取得
-      const data = await response.json();
-      console.log("外部APIレスポンス:", data);
-
-      // 必要に応じて取得したデータを返す
-      return data;
-    } catch (error) {
-      console.error("サーバー内部エラー:", error);
-      throw new Error("サーバー内部エラーが発生しました");
+    // レスポンスのステータスを確認
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("外部APIエラー:", errorText);
+      throw new Error(`外部APIエラー: ${errorText}`);
     }
-  };
 
-  // ページロード時にfetchDataを実行
-  fetchData();
+    // レスポンスデータをJSON形式で取得
+    const data = await response.json();
+    console.log("外部APIレスポンス:", data);
+
+    // 必要に応じて取得したデータを返す
+    return data;
+  } catch (error) {
+    console.error("サーバー内部エラー:", error);
+    throw new Error("サーバー内部エラーが発生しました");
+  }
+};
+
+export default function Component() {
+  // useEffectを使用してページロード時にデータを取得
+  useEffect(() => {
+    fetchData().catch((error) => {
+      console.error("ページロード時のエラー:", error);
+    });
+  }, []); // 依存配列を追加してuseEffectを閉じる
 
   // フォームデータの状態を管理
   const [formData, setFormData] = useState({
@@ -74,30 +83,25 @@ export default function Component() {
 
   // フォーム送信処理
   const handleSubmit = async (e) => {
-    e.preventDefault(); // ページリロードを防止
+    e.preventDefault();
 
     try {
-      // ファイルが選択されている場合のみアップロード
       if (uploadedFile) {
         const fileFormData = new FormData();
         fileFormData.append("file", uploadedFile);
 
-        // ファイルをAPIにアップロード
         const fileResponse = await fetch(`${apiUrl}/PostStockpileImage`, {
           method: "POST",
           body: fileFormData,
         });
 
         if (!fileResponse.ok) {
-          alert("ファイルのアップロードに失敗しました");
-          console.error("ファイルアップロードエラー:", fileResponse.statusText);
-          return;
+          throw new Error(`ファイルアップロード失敗: ${fileResponse.status}`);
         }
 
         alert("ファイルが正常にアップロードされました");
       }
 
-      // 登録情報をAPIに送信
       const response = await fetch(`${apiUrl}/PutStockpileInfo/`, {
         method: "PUT",
         headers: {
@@ -106,7 +110,6 @@ export default function Component() {
         body: JSON.stringify(formData),
       });
 
-      // サーバー応答を確認
       if (response.ok) {
         setFormData({
           name: "",
@@ -117,12 +120,12 @@ export default function Component() {
         setUploadedFile(null);
         alert("送信成功");
       } else {
-        console.error("サーバーエラー:", response.statusText);
-        alert("登録情報の送信に失敗しました");
+        const errorText = await response.text();
+        throw new Error(`送信失敗: ${errorText}`);
       }
     } catch (error) {
-      console.error("エラー:", error);
-      alert("エラーが発生しました");
+      console.error("送信エラー:", error);
+      alert(`送信中にエラーが発生しました: ${error.message}`);
     }
   };
 
