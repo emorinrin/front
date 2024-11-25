@@ -67,7 +67,11 @@ export default function SnackRegistrationApp() {
               {/* 戻るボタン */}
               <Button
                 variant="gray"
-                onClick={() => setStep(step - 1)}
+                onClick={() =>
+                  router.push(
+                    `/stockpile_registration_iteminfo?jan_code=${itemNumber}`
+                  )
+                }
                 className="text-xl px-6 py-3"
               >
                 JANコードで登録

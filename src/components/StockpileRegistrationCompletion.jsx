@@ -3,10 +3,11 @@
 import Link from "next/link"; // Linkコンポーネントをインポート
 
 // 背景が黒、文字が白のヘッダー
-export default function Header() {
+export default function Header({ onClose }) {
   const handleCloseModal = () => {
     // モーダルウィンドウを閉じる処理をここに追加
     console.log("Modal closed");
+    onClose(); // 親コンポーネントから渡された関数を呼び出す
   };
 
   return (
