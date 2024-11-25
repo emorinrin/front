@@ -1,37 +1,17 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation"; // ルーター機能とクエリパラメータ取得用フックをインポート
 import Header from "@/components/header";
 import StockpileRegistrationBarcodeRead from "@/components/StockpileRegistrationBarcodeRead";
 import StockpileRegistrationCompletion from "@/components/StockpileRegistrationCompletion";
 
 // 環境変数からAPIのURLを取得
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-const jan_code = 4902181102480;
 
 // データを外部APIから取得する関数
-const fetchData = async () => {
+const fetchData = async (jan_code) => {
   try {
-    // 仮のリクエストボディ（実際のデータに置き換えてください）
-    const requestBody = {
-      jan_code: 4902181102480,
-      name: "test",
-      quantity: 0,
-      date: "2022-12-31",
-      category: "test",
-    };
-
-    // リクエストボディのバリデーション（形式が正しいかチェック）
-    if (
-      !requestBody.jan_code ||
-      !requestBody.name ||
-      !requestBody.category ||
-      !requestBody.date
-    ) {
-      console.error("リクエストデータ形式が不正です:", requestBody);
-      throw new Error("リクエストデータ形式が不正です");
-    }
-
     // APIにリクエストを送信
     const response = await fetch(
       `${apiUrl}/ReadStockpileInfo/?jan_code=${jan_code}`,
@@ -63,12 +43,17 @@ const fetchData = async () => {
 };
 
 export default function Component() {
+  const searchParams = useSearchParams(); // クエリパラメータ取得用フックを初期化
+  const jan_code = searchParams.get("jan_code"); // クエリパラメータからJANコードを取得
+
   // useEffectを使用してページロード時にデータを取得
   useEffect(() => {
-    fetchData().catch((error) => {
-      console.error("ページロード時のエラー:", error);
-    });
-  }, []); // 依存配列を追加してuseEffectを閉じる
+    if (jan_code) {
+      fetchData(jan_code).catch((error) => {
+        console.error("ページロード時のエラー:", error);
+      });
+    }
+  }, [jan_code]); // 依存配列にjan_codeを追加
 
   // フォームデータの状態を管理
   const [formData, setFormData] = useState({
@@ -152,6 +137,13 @@ export default function Component() {
   };
   const handleCompletionCloseModal = () => {
     setCompletionModalOpen(false);
+    setFormData({
+      name: "",
+      quantity: "",
+      date: "",
+      category: "",
+    });
+    setUploadedFile(null);
   };
 
   // 入力フォームの値を管理
@@ -296,7 +288,9 @@ export default function Component() {
             className="bg-white p-4 rounded shadow-lg"
             onClick={(e) => e.stopPropagation()}
           >
-            <StockpileRegistrationCompletion />
+            <StockpileRegistrationCompletion
+              onClose={handleCompletionCloseModal}
+            />
           </div>
         </div>
       )}
