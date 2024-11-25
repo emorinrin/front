@@ -18,7 +18,7 @@ export default function BarcodeScanner({ onScan }) {
 
         // バーコードをAPIに送信して商品名を取得
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/get_product_name?barcode=${barcode}`
+          `${process.env.NEXT_PUBLIC_API_URL}/ReadStockpileInfo?barcode=${barcode}`
         );
 
         if (!response.ok) {

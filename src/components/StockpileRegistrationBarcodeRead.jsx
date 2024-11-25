@@ -7,7 +7,9 @@ import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button"; // ボタンUIコンポーネント
 import { Input } from "@/components/ui/input"; // 入力フォームUIコンポーネント
 import { Card, CardContent, CardFooter } from "@/components/ui/card"; // カードレイアウトUIコンポーネント
-import BarcodeScanner from "@/components/BarcodeScanner.jsx";
+import BarcodeScanner from "@/components/BarcodeScanner";
+//import BarcodeScanner from "@/components/BarcodeScanner2";
+//import { BarcodeScanner } from "@/components/barcode-scanner.jsx";
 import { useRouter } from "next/navigation"; // ルーティング用フック
 
 // アプリのメインコンポーネントを定義
@@ -57,7 +59,7 @@ export default function SnackRegistrationApp() {
               <Input
                 value={itemNumber}
                 onChange={(e) => setItemNumber(e.target.value)}
-                placeholder="品名(手動入力も可能)"
+                placeholder="JANコードを手動でも入力可能です)"
                 className="text-xl h-16 px-6 w-full"
               />
             </CardContent>
@@ -68,7 +70,7 @@ export default function SnackRegistrationApp() {
                 onClick={() => setStep(step - 1)}
                 className="text-xl px-6 py-3"
               >
-                戻る
+                JANコードで登録
               </Button>
             </CardFooter>
           </Card>
