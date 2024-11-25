@@ -17,8 +17,8 @@ const fetchData = async () => {
       jan_code: 4902181102480,
       name: "test",
       quantity: 0,
-      category: "test",
       date: "2022-12-31",
+      category: "test",
     };
 
     // リクエストボディのバリデーション（形式が正しいかチェック）
