@@ -1,0 +1,79 @@
+/* 全体 */
+.home-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+  /* ヘッダー */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+  }
+  
+  .header-left h1 {
+    font-size: 18px;
+  }
+  
+  .header-right {
+    text-align: right;
+  }
+  
+  /* メインコンテンツ */
+  .main-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+  }
+  
+  .rank-card {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background: #f0f0f0;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .rank-card img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+  }
+  
+  .category-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .category-card {
+    flex: 1;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 10px;
+  }
+  
+  .category-card img {
+    width: 50px;
+    height: 50px;
+  }
+  
+  /* フッター */
+  .footer {
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+  }
+  
+  .footer-menu {
+    display: flex;
+    justify-content: space-around;
+  }
+  

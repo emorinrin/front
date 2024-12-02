@@ -1,0 +1,47 @@
+/* 全体のコンテナ */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f5f5f5; /* 背景色 */
+  padding: 20px;
+}
+
+/* ロゴセクション */
+.logo-container {
+  margin-bottom: 30px;
+}
+
+.logo {
+  border-radius: 10px; /* ロゴを少し丸く */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 影を追加 */
+}
+
+/* ボタンセクション */
+.button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* ボタン間のスペース */
+  width: 100%;
+  max-width: 300px; /* 最大幅を設定 */
+}
+
+/* ボタンのスタイル */
+.home-button {
+  padding: 15px;
+  font-size: 18px;
+  color: #333;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.home-button:hover {
+  background-color: #f0f0f0; /* ホバー時の背景色 */
+  transform: translateY(-2px); /* 少し浮く */
+}
