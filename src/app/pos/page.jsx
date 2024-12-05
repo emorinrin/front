@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import "./login.css"; // 必要に応じてCSSファイルをインポート
+// import "./login.css"; // 必要に応じてCSSファイルをインポート
 
 export default function LoginPage() {
   return (
