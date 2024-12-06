@@ -76,3 +76,8 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+@font-face {
+  font-family: "RPGFont";
+  src: url("/fonts/DotGothic16-Regular.ttf") format("truetype");
+}
