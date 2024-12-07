@@ -83,5 +83,5 @@ body {
 }
 
 .pixelated {
-  image-rendering: pixelated;
+  image-rendering: smooth;
 }
