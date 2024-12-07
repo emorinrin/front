@@ -9,7 +9,7 @@ export function BottomNav() {
       <div className="container mx-auto max-w-7xl">
         <div className="flex justify-around">
           <Link
-            href="./home2"
+            href="/home2"
             className="flex flex-col items-center p-2 text-yellow-400 hover:text-yellow-300"
           >
             <House className="h-6 w-6 sm:h-8 sm:w-8" />
