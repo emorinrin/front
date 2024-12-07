@@ -1,6 +1,32 @@
+/* 追加 */
+@import url("https://fonts.googleapis.com/css2?family=DotGothic16&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* 追加 */
+:root {
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 47 95% 29%;
+  --primary-foreground: 26 83% 14%;
+  --secondary: 240 3.7% 15.9%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --accent: 240 3.7% 15.9%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --ring: 240 4.9% 83.9%;
+}
 
 body {
   font-family: Arial, Helvetica, sans-serif;
@@ -77,7 +103,20 @@ body {
   }
 }
 
+/* 追加 */
 @font-face {
   font-family: "RPGFont";
   src: url("/fonts/DotGothic16-Regular.ttf") format("truetype");
+}
+
+.font-rpg {
+  font-family: "DotGothic16", sans-serif;
+}
+
+body {
+  @apply bg-[#0c0c24] text-white font-rpg;
+}
+
+.pixelated {
+  image-rendering: pixelated;
 }
