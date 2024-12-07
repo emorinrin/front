@@ -5,8 +5,10 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Scroll, Lock } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export function LoginForm() {
+  const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -17,6 +19,7 @@ export function LoginForm() {
     if (username === "hero" && password === "dragon") {
       setError("");
       alert("ログイン成功！冒険に出発しましょう！");
+      router.push("./home2");
     } else {
       setError("ユーザー名かパスワードが間違っています。");
     }
