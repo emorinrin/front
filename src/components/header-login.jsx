@@ -6,7 +6,7 @@ export function HeaderLogin() {
     <header className="border-b-2 border-[#836723] bg-[#2a2a4a] p-4">
       <div className="container mx-auto flex items-center justify-between">
         <Link
-          href="/"
+          href="/home2"
           className="text-xl font-bold text-yellow-400 tracking-wide flex items-center"
         >
           <Scroll className="mr-2" />
