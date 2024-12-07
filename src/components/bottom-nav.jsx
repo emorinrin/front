@@ -1,6 +1,6 @@
 "use client";
 
-import { Bell, Map, Volume2 } from "lucide-react";
+import { Bell, Map, Volume2, House } from "lucide-react";
 import Link from "next/link";
 
 export function BottomNav() {
@@ -8,6 +8,13 @@ export function BottomNav() {
     <nav className="border-t-2 border-[#836723] bg-[#2a2a4a] py-2 sm:py-4">
       <div className="container mx-auto max-w-7xl">
         <div className="flex justify-around">
+          <Link
+            href="./home2"
+            className="flex flex-col items-center p-2 text-yellow-400 hover:text-yellow-300"
+          >
+            <House className="h-6 w-6 sm:h-8 sm:w-8" />
+            <span className="text-xs sm:text-sm mt-1">ホーム</span>
+          </Link>
           <Link
             href="#"
             className="flex flex-col items-center p-2 text-yellow-400 hover:text-yellow-300"
