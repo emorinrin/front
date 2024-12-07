@@ -24,7 +24,7 @@ export function Hero({ rank, points }) {
       </div>
       <div>
         <h2 className="text-lg sm:text-xl font-bold text-yellow-400">
-          防災ランク{rank}級
+          防災ランク{rank}段
         </h2>
         <p className="text-sm sm:text-base text-gray-300">
           ポイント: {points}P

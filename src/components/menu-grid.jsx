@@ -1,6 +1,13 @@
 "use client";
 
-import { Book, Globe, Phone, ShieldAlert } from "lucide-react";
+import {
+  Book,
+  Globe,
+  Phone,
+  ShieldAlert,
+  Search,
+  ScrollText,
+} from "lucide-react";
 import Link from "next/link";
 
 export function MenuGrid() {
@@ -37,15 +44,37 @@ export function MenuGrid() {
             href="#"
             className="flex flex-col items-center p-4 sm:p-6 bg-[#2a2a4a] rounded-lg border-2 border-[#836723] hover:bg-[#3a3a5a] transition-colors"
           >
+            <Search className="h-8 w-8 sm:h-10 sm:w-10 text-yellow-400 mb-2" />
+            <span className="text-sm sm:text-base">備蓄品見積り</span>
+          </Link>
+          <Link
+            href="#"
+            className="flex flex-col items-center p-4 sm:p-6 bg-[#2a2a4a] rounded-lg border-2 border-[#836723] hover:bg-[#3a3a5a] transition-colors"
+          >
+            <ScrollText className="h-8 w-8 sm:h-10 sm:w-10 text-yellow-400 mb-2" />
+            <span className="text-sm sm:text-base">備蓄品登録</span>
+          </Link>
+        </div>
+      </section>
+
+      <section>
+        <h3 className="text-lg sm:text-xl font-bold text-yellow-400 mb-3 sm:mb-4">
+          被災時に使う
+        </h3>
+        <div className="grid grid-cols-2 gap-4 sm:gap-6">
+          <Link
+            href="#"
+            className="flex flex-col items-center p-4 sm:p-6 bg-[#2a2a4a] rounded-lg border-2 border-[#836723] hover:bg-[#3a3a5a] transition-colors"
+          >
             <Phone className="h-8 w-8 sm:h-10 sm:w-10 text-yellow-400 mb-2" />
-            <span className="text-sm sm:text-base">緊急連絡先登録</span>
+            <span className="text-sm sm:text-base">SOS</span>
           </Link>
           <Link
             href="#"
             className="flex flex-col items-center p-4 sm:p-6 bg-[#2a2a4a] rounded-lg border-2 border-[#836723] hover:bg-[#3a3a5a] transition-colors"
           >
             <Globe className="h-8 w-8 sm:h-10 sm:w-10 text-yellow-400 mb-2" />
-            <span className="text-sm sm:text-base">備蓄品登録</span>
+            <span className="text-sm sm:text-base">避難所マップ</span>
           </Link>
         </div>
       </section>
