@@ -1,0 +1,37 @@
+.estimate-container {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .input-group {
+    margin-bottom: 20px;
+  }
+  
+  .input-group label {
+    font-size: 18px;
+    margin-right: 10px;
+  }
+  
+  input {
+    padding: 5px;
+    font-size: 16px;
+  }
+  
+  .estimate-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .result {
+    margin-top: 20px;
+    background-color: #f0f0f0;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: left;
+  }
+  
