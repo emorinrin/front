@@ -52,4 +52,78 @@
     color: #555;
     margin-top: 5px;
   }
+
+  /* 備蓄状況のマーク */
+.status {
+    font-weight: bold;
+    font-size: 18px;
+    margin-left: 10px; /* 名前との間に余白を追加 */
+  }
+  
+  .sufficient {
+    color: green; /* 足りている場合の緑 */
+  }
+  
+  .insufficient {
+    color: red; /* 足りない場合の赤 */
+  }
+
+
+  /* 備蓄品詳細 (賞味期限とボタンを横並びに配置) */
+.item-details {
+    display: flex;
+    align-items: center; /* 賞味期限とボタンの垂直位置を揃える */
+    justify-content: space-between; /* 要素間のスペースを均等に配置 */
+    gap: 10px; /* 賞味期限とボタン間の余白 */
+    margin-top: 5px;
+  }
+  
+  /* 賞味期限のスタイル */
+  .expiration {
+    font-size: 14px;
+    color: #555;
+  }
+  
+  /* ボタンのグループ (横並び) */
+  .button-group {
+    display: flex;
+    gap: 10px; /* ボタン間のスペース */
+  }
+  
+  /* ボタンのスタイル */
+  .btn {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .regular-btn {
+    background-color: #007bff; /* 青色 */
+    color: white;
+  }
+  
+  .regular-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .buy-btn {
+    background-color: #28a745; /* 緑色 */
+    color: white;
+  }
+  
+  .buy-btn:hover {
+    background-color: #218838;
+  }
+  
+  .register-btn {
+    background-color: #ffc107; /* 黄色 */
+    color: white;
+  }
+  
+  .register-btn:hover {
+    background-color: #e0a800;
+  }
   

@@ -42,12 +42,26 @@ const stockData = [
             <ul className="item-list">
               {category.items.map((item, itemIndex) => (
                 <li key={itemIndex} className="item">
-                  <div className="item-name">{item.name}</div>
+                  <div className="item-name">
+                    {item.name}{" "}
+                    {item.sufficient ? (
+                      <span className="status sufficient">✓</span>
+                    ) : (
+                      <span className="status insufficient">×</span>
+                    )}
+                  </div>
+  
+                  {/* 賞味期限とボタンを横並びにする */}
                   <div className="item-details">
                     <span>量: {item.quantity}</span>
                     {item.expiration !== "なし" && (
-                      <span>賞味期限: {item.expiration}</span>
+                      <span className="expiration">賞味期限: {item.expiration}</span>
                     )}
+                    <div className="button-group">
+                      <button className="btn regular-btn">定期便</button>
+                      <button className="btn buy-btn">購入</button>
+                      <button className="btn register-btn">自分で登録</button>
+                    </div>
                   </div>
                 </li>
               ))}
