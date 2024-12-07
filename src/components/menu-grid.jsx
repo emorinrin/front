@@ -41,7 +41,7 @@ export function MenuGrid() {
         </h3>
         <div className="grid grid-cols-2 gap-4 sm:gap-6">
           <Link
-            href="#"
+            href="./home2/estimate"
             className="flex flex-col items-center p-4 sm:p-6 bg-[#2a2a4a] rounded-lg border-2 border-[#836723] hover:bg-[#3a3a5a] transition-colors"
           >
             <Search className="h-8 w-8 sm:h-10 sm:w-10 text-yellow-400 mb-2" />
