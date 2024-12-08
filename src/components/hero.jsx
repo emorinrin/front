@@ -1,6 +1,5 @@
-"use client";
-
 import Image from "next/image";
+import Link from "next/link";
 
 export function Hero({ rank, points }) {
   const heroImages = {
@@ -13,7 +12,11 @@ export function Hero({ rank, points }) {
 
   return (
     <div className="flex items-center gap-4 p-4 bg-[#2a2a4a] rounded-lg border-2 border-[#836723] mb-6 sm:p-6">
-      <div className="relative w-24 h-24 sm:w-32 sm:h-32">
+      <Link
+        href="./home2/mypage"
+        className="relative w-24 h-24 sm:w-32 sm:h-32 transition-transform hover:scale-105"
+        title="マイページを開く"
+      >
         <Image
           src={heroImages[rank] || "/hero-rank-1.png"}
           layout="fill"
@@ -21,10 +24,11 @@ export function Hero({ rank, points }) {
           alt={`ランク ${rank} の勇者`}
           className="pixelated"
         />
-      </div>
+        <span className="sr-only">マイページを開く</span>
+      </Link>
       <div>
         <h2 className="text-lg sm:text-xl font-bold text-yellow-400">
-          防災ランク{rank}段
+          防災ランク{rank}級
         </h2>
         <p className="text-sm sm:text-base text-gray-300">
           ポイント: {points}P
