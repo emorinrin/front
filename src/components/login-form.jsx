@@ -61,7 +61,7 @@ export function LoginForm() {
               htmlFor="password"
               className="block text-sm font-medium text-gray-300 mb-1"
             >
-              秘密の呪文
+              復活の呪文
             </label>
             <div className="relative">
               <Lock
