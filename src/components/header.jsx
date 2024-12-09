@@ -3,6 +3,7 @@
 import { MenuIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Link from "next/link";
 
 export function Header() {
   return (
@@ -11,9 +12,14 @@ export function Header() {
         <Button variant="ghost" size="icon" className="text-yellow-400">
           <MenuIcon className="h-6 w-6 sm:h-8 sm:w-8" />
         </Button>
-        <h1 className="text-xl sm:text-2xl font-bold text-yellow-400 tracking-wide">
-          防災クエスト
-        </h1>
+        <Link
+          href="/home2"
+          className="flex flex-col items-center p-2 text-yellow-400 hover:text-yellow-300"
+        >
+          <h1 className="text-xl sm:text-2xl font-bold text-yellow-400  tracking-wide">
+            防災クエスト
+          </h1>
+        </Link>
         <div className="flex items-center gap-1">
           <Image
             src="/coin.png"
