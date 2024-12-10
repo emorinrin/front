@@ -11,7 +11,7 @@ export function Hero({ rank, points }) {
   };
 
   return (
-    <div className="flex items-center gap-4 p-4 bg-[#2a2a4a] rounded-lg border-2 border-[#836723] mb-6 sm:p-6">
+    <div className="flex items-center gap-4 p-4 bg-[#2a2a4a] rounded-lg border-2 border-[#836723] mb-6 sm:p-6 relative z-20">
       <Link
         href="./home2/mypage"
         className="relative w-24 h-24 sm:w-32 sm:h-32 transition-transform hover:scale-105"
@@ -31,10 +31,10 @@ export function Hero({ rank, points }) {
           防災ランク{rank}級
         </h2>
         <p className="text-sm sm:text-base text-gray-300">
-          ポイント: {points}P
+          ポイント: {points}G
         </p>
         <p className="text-sm sm:text-base text-gray-300">
-          次のランクまで: {500 - points}P
+          次のランクまで: {500 - points}G
         </p>
       </div>
     </div>

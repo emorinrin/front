@@ -17,8 +17,14 @@ export function EstimateForm() {
   };
 
   return (
-    <div className="w-full space-y-6">
-      <div className="flex items-center gap-2 bg-black p-4 rounded-lg">
+    <div className="w-full space-y-6 relative z-20">
+      <div
+        className="flex items-center gap-2 p-4 rounded-lg"
+        style={{
+          background: "rgba(55, 65, 81, 0.3)",
+          backdropFilter: "blur(2px)",
+        }}
+      >
         <Shield className="h-6 w-6 text-yellow-400" />
         <h1 className="text-xl font-bold text-yellow-400">備蓄品見積もり</h1>
       </div>
@@ -92,7 +98,7 @@ export function EstimateForm() {
 
         <Button
           type="submit"
-          className="w-full bg-black hover:bg-gray-900 text-white py-6 text-lg"
+          className="w-full bg-blue-900 hover:bg-blue-800 text-white py-6 text-lg"
         >
           見積もり
         </Button>

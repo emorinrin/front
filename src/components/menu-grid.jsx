@@ -12,7 +12,7 @@ import Link from "next/link";
 
 export function MenuGrid() {
   return (
-    <div className="space-y-6 sm:space-y-8">
+    <div className="space-y-6 sm:space-y-8 relative z-20">
       <section>
         <h3 className="text-lg sm:text-xl font-bold text-yellow-400 mb-3 sm:mb-4">
           防災を学ぶ
