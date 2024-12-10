@@ -31,7 +31,8 @@ export function AchievementBadges() {
         className="flex justify-between items-center w-full text-yellow-400 font-bold"
         onClick={() => setIsExpanded(!isExpanded)}
       >
-        <span>実績バッジ</span>
+        <Award />
+        <span className="ml-2 text-left flex-grow">実績バッジ</span>
         {isExpanded ? <ChevronUp /> : <ChevronDown />}
       </button>
       {isExpanded && (
