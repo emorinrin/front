@@ -6,7 +6,7 @@ export function RankingSection() {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 relative z-30">
       <div className="bg-blue-900 rounded-lg p-4">
         <h3 className="text-center text-lg font-bold text-yellow-400 mb-4 flex items-center justify-center gap-2">
           <Trophy className="w-5 h-5" />

@@ -5,9 +5,10 @@ import Link from "next/link";
 
 export function ActionButtons() {
   return (
-    <div className="grid grid-cols-2 gap-4">
+    <div className="grid grid-cols-2 gap-4 relative z-30">
       <Link
-        href="/shop"
+        href="https://www.kaunet.com/"
+        target="_blank"
         className="bg-blue-900 hover:bg-blue-800 rounded-lg p-4 text-center flex flex-col items-center justify-center gap-2 transition-colors"
       >
         <ShoppingBag className="w-6 h-6 text-yellow-400" />
@@ -18,7 +19,7 @@ export function ActionButtons() {
         className="bg-blue-900 hover:bg-blue-800 rounded-lg p-4 text-center flex flex-col items-center justify-center gap-2 transition-colors"
       >
         <Share2 className="w-6 h-6 text-yellow-400" />
-        <span className="text-sm">防災度投稿</span>
+        <span className="text-sm">実績投稿</span>
       </Link>
     </div>
   );

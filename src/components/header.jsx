@@ -8,7 +8,7 @@ import { HamburgerMenu } from "./hamburger-menu";
 
 export function Header() {
   return (
-    <header className="border-b-2 border-[#836723] bg-[#2a2a4a] p-4 sm:p-6">
+    <header className="border-b-2 border-[#836723] bg-[#2a2a4a] p-4 sm:p-6 relative z-20">
       <div className="container mx-auto flex items-center justify-between max-w-7xl">
         <HamburgerMenu />
         <Link
@@ -27,7 +27,7 @@ export function Header() {
             alt="ポイントアイコン"
             className="text-yellow-400 sm:w-8 sm:h-8"
           />
-          <span className="text-yellow-400 font-bold sm:text-lg">315P</span>
+          <span className="text-yellow-400 font-bold sm:text-lg">315 G</span>
         </div>
       </div>
     </header>
