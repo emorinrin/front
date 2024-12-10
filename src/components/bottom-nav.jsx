@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export function BottomNav() {
   return (
-    <nav className="border-t-2 border-[#836723] bg-[#2a2a4a] py-2 sm:py-4">
+    <nav className="border-t-2 border-[#836723] bg-[#2a2a4a] py-2 sm:py-4 relative z-20">
       <div className="container mx-auto max-w-7xl">
         <div className="flex justify-around">
           <Link
