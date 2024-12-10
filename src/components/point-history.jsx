@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp, History } from "lucide-react";
 
 export function PointHistory() {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -18,7 +18,8 @@ export function PointHistory() {
         className="flex justify-between items-center w-full text-yellow-400 font-bold"
         onClick={() => setIsExpanded(!isExpanded)}
       >
-        <span>ポイント履歴</span>
+        <History />
+        <span className="ml-2 text-left flex-grow">ポイント履歴</span>
         {isExpanded ? <ChevronUp /> : <ChevronDown />}
       </button>
       {isExpanded && (
