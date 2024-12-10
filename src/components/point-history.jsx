@@ -13,7 +13,7 @@ export function PointHistory() {
   ];
 
   return (
-    <div className="bg-[#2a2a4a] rounded-lg p-4 border-2 border-[#836723]">
+    <div className="bg-[#2a2a4a] rounded-lg p-4 border-2 border-[#836723] relative z-30">
       <button
         className="flex justify-between items-center w-full text-yellow-400 font-bold"
         onClick={() => setIsExpanded(!isExpanded)}
@@ -30,7 +30,7 @@ export function PointHistory() {
             >
               <span>{item.date}</span>
               <span>{item.description}</span>
-              <span className="text-yellow-400">+{item.points}P</span>
+              <span className="text-yellow-400">+{item.points}G </span>
             </div>
           ))}
         </div>
