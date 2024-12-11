@@ -7,7 +7,7 @@ import {
   X,
   Home,
   User,
-  Package,
+  ListTodo,
   MessageCircle,
   LogOut,
 } from "lucide-react";
@@ -20,7 +20,7 @@ export function HamburgerMenu() {
   const menuItems = [
     { icon: Home, label: "ホーム", href: "/home2" },
     { icon: User, label: "マイページ", href: "/home2/mypage" },
-    { icon: Package, label: "備蓄品管理", href: "/home2/inventory" },
+    { icon: ListTodo, label: "備蓄品リスト", href: "/home2/stockpile-list" },
     { icon: MessageCircle, label: "お問い合わせ", href: "/contact" },
     { icon: LogOut, label: "ログアウト", href: "/" },
   ];

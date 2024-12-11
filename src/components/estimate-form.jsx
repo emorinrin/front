@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Shield } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export function EstimateForm() {
   const [adults, setAdults] = useState("");
@@ -96,12 +97,14 @@ export function EstimateForm() {
           </div>
         </div>
 
-        <Button
-          type="submit"
-          className="w-full bg-blue-900 hover:bg-blue-800 text-white py-6 text-lg"
-        >
-          見積もり
-        </Button>
+        <Link href="./stockpile-list" className="block">
+          <Button
+            type="submit"
+            className="w-full bg-blue-900 hover:bg-blue-800 text-white py-6 text-lg"
+          >
+            見積もり
+          </Button>
+        </Link>
       </form>
     </div>
   );
