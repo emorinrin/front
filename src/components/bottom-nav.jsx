@@ -24,7 +24,7 @@ export function BottomNav() {
             <span className="text-xs sm:text-sm mt-1">ホーム</span>
           </Link>
           <Link
-            href="/home2/inventory"
+            href="/home2/stockpile-list"
             className="flex flex-col items-center p-2 text-yellow-400 hover:text-yellow-300"
           >
             <ListTodo className="h-6 w-6 sm:h-8 sm:w-8" />
