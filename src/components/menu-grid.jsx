@@ -59,8 +59,7 @@ export function MenuGrid() {
             <span className="text-sm sm:text-base">備蓄品見積り</span>
           </Link>
           <Link
-            href="#"
-            onClick={handleUnderConstructionClick}
+            href="./home2/stockpile_registration_iteminfo"
             className="flex flex-col items-center p-4 sm:p-6 bg-[#2a2a4a] rounded-lg border-2 border-[#836723] hover:bg-[#3a3a5a] transition-colors"
           >
             <ListPlus className="h-8 w-8 sm:h-10 sm:w-10 text-yellow-400 mb-2" />

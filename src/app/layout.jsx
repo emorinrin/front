@@ -21,6 +21,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="ja">
+      <head>
+        {/* ファビコンの設定 */}
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="description" content={metadata.description} />
+        <title>{metadata.title}</title>
+      </head>
       <Suspense>
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
