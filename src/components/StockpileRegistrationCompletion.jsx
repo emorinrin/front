@@ -30,7 +30,7 @@ export default function Header({ onClose }) {
           続けて登録
         </button>
 
-        <Link href="/home2/inventory">
+        <Link href="/home2/stockpile-list">
           <button
             type="button"
             className="w-full p-2 rounded bg-black text-white hover:bg-black/90 transition-colors"
