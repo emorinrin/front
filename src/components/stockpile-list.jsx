@@ -25,10 +25,10 @@ export function StockpileList() {
         {
           name: "缶詰",
           quantity: 30,
-          expirationDate: "2025/06",
+          expirationDate: "2024/12",
           category: "Food",
           status: "warning",
-          warningMessage: "5個不足",
+          warningMessage: "間もなく賞味期限が切れます",
         },
       ],
     },
@@ -38,7 +38,7 @@ export function StockpileList() {
         {
           name: "電池",
           quantity: 50,
-          expirationDate: "12/2028",
+          expirationDate: "2028/12",
           category: "Medical",
           status: "ok",
         },
