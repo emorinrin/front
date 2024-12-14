@@ -40,7 +40,7 @@ export function RankingSection() {
           <div className="mt-4 space-y-2 text-sm">
             <div className="flex justify-between">
               <span>総獲得ポイント</span>
-              <span className="text-yellow-400">12,500 P</span>
+              <span className="text-yellow-400">12,500 G</span>
             </div>
             <div className="flex justify-between">
               <span>連続ログイン日数</span>

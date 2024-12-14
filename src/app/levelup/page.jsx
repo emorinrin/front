@@ -81,7 +81,6 @@ export default function LevelUp() {
         {/* コンテンツ */}
         <div className="bg-black bg-opacity-70 rounded-lg p-6 text-center max-w-lg w-full drop-shadow-md">
           <p className="text-lg mb-2">ガスコンロを てにいれた！</p>
-          <p className="text-lg mb-2">おいしい水を てにいれた！</p>
           <p className="text-lg font-bold">勇者は レベル10に あがった！</p>
         </div>
       </main>
