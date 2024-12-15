@@ -10,13 +10,14 @@ import { Volume2, VolumeX } from "lucide-react";
 export default function LevelUp() {
   const [isMuted, setIsMuted] = useState(false);
   const audioRef = useRef(null);
-  const rank = 5; // 勇者のランクを指定（例: ランク5）
+  const rank = 6; // 勇者のランクを指定（例: ランク5）
   const heroImages = {
     1: "/hero-rank-1.png",
     2: "/hero-rank-2.png",
     3: "/hero-rank-3.png",
     4: "/hero-rank-4.png",
     5: "/hero-rank-5.png",
+    6: "/hero-rank-6.png",
   };
 
   useEffect(() => {
@@ -53,7 +54,7 @@ export default function LevelUp() {
 
       <main className="flex flex-col items-center justify-center flex-1 z-30">
         {/* 音声ファイル */}
-        <audio ref={audioRef} src="/level-up-sound.mp3" />
+        <audio ref={audioRef} src="/level-down-sound.mp3" />
 
         {/* ミュートボタン */}
         <button
@@ -74,14 +75,17 @@ export default function LevelUp() {
         </div>
 
         {/* レベルアップタイトル */}
-        <div className="text-4xl font-bold text-orange-400 drop-shadow-lg mb-4">
-          レベルアップ!!
+        <div className="text-4xl font-bold text-blue-400 drop-shadow-lg mb-4">
+          レベルダウン!!
         </div>
 
         {/* コンテンツ */}
         <div className="bg-black bg-opacity-70 rounded-lg p-6 text-center max-w-lg w-full drop-shadow-md">
-          <p className="text-lg mb-2">ガスコンロを てにいれた！</p>
-          <p className="text-lg font-bold">勇者は レベル10に あがった！</p>
+          <p className="text-lg mb-2">
+            おおロトよ！ くさらせてしまうとは なにごとか！
+          </p>
+          <p className="text-lg mb-2">缶詰 がのろわれた</p>
+          <p className="text-lg font-bold">勇者は レベル5に さがった</p>
         </div>
       </main>
       <BottomNav />
