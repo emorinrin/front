@@ -66,8 +66,8 @@ export default function RequiredItems() {
       title: "エネルギー",
       items: [
         {
-          name: "携帯用充電器",
-          requiredQuantity: 2,
+          name: "ガスコンロ",
+          requiredQuantity: 1,
           currentQuantity: 0,
           unit: "個",
           category: "Energy",

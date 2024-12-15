@@ -14,13 +14,6 @@ export default function StockpileListPage() {
         <div className="max-w-2xl mx-auto">
           <div className="flex justify-between items-center mb-6">
             <h1 className="text-2xl font-bold text-yellow-400">備蓄品一覧</h1>
-<<<<<<< HEAD
-            <Link href="/home2/estimate">
-              <button className="bg-black hover:bg-gray-800 text-white px-4 py-2 rounded-lg transition-colors">
-                再計算する
-              </button>
-            </Link>
-=======
             <div>
               <Link href="/home2/estimate">
                 <button className="bg-black hover:bg-gray-800 text-white px-4 py-2 rounded-lg transition-colors">
@@ -33,7 +26,6 @@ export default function StockpileListPage() {
                 </button>
               </Link>
             </div>
->>>>>>> e506ca68a8ab6bd370c99c5186f027c53f50d67a
           </div>
           <StockpileList />
         </div>
