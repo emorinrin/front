@@ -9,6 +9,7 @@ import {
   Battery,
   AmbulanceIcon as FirstAid,
   Plus,
+  PenLine,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -31,7 +32,7 @@ export default function RequiredItems() {
   // この例では、APIからデータを取得する代わりにハードコードしています
   const [categories] = useState([
     {
-      title: "飲料水 (Water)",
+      title: "飲料類",
       items: [
         {
           name: "水",
@@ -43,7 +44,7 @@ export default function RequiredItems() {
       ],
     },
     {
-      title: "食料 (Food)",
+      title: "食料",
       items: [
         {
           name: "レトルト食品",
@@ -62,7 +63,7 @@ export default function RequiredItems() {
       ],
     },
     {
-      title: "エネルギー (Energy)",
+      title: "エネルギー",
       items: [
         {
           name: "携帯用充電器",
@@ -81,7 +82,7 @@ export default function RequiredItems() {
       ],
     },
     {
-      title: "医療品 (Medical)",
+      title: "医療品",
       items: [
         {
           name: "救急箱",
@@ -149,6 +150,12 @@ export default function RequiredItems() {
             </div>
           ))}
         </div>
+        <Link href="/home2/stockpile-list" className="flex justify-end py-4">
+          <button className="bg-black hover:bg-gray-800 text-white px-4 py-2 rounded-lg transition-colors flex items-center space-x-2">
+            <PenLine className="w-5 h-5" />
+            <span>備蓄品リストへ反映</span>
+          </button>
+        </Link>
       </main>
       <BottomNav />
     </div>
