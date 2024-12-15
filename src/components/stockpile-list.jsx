@@ -52,6 +52,14 @@ export function StockpileList() {
       warningMessage: "間もなく賞味期限が切れます",
     },
     {
+      name: "ガスコンロ",
+      quantity: 0,
+      expirationDate: "2030/12",
+      category: "Energy",
+      status: "warning",
+      warningMessage: "数量が不足しています",
+    },
+    {
       name: "携帯用充電器",
       quantity: 2,
       expirationDate: "2028/12",
