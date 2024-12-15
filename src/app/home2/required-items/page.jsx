@@ -73,6 +73,13 @@ export default function RequiredItems() {
           category: "Energy",
         },
         {
+          name: "携帯用充電器",
+          requiredQuantity: 2,
+          currentQuantity: 0,
+          unit: "個",
+          category: "Energy",
+        },
+        {
           name: "乾電池",
           requiredQuantity: 12,
           currentQuantity: 0,
