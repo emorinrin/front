@@ -97,7 +97,11 @@ export function EstimateForm() {
           </div>
         </div>
 
+<<<<<<< HEAD
+        <Link href="./stockpile-list" className="block">
+=======
         <Link href="./required-items" className="block">
+>>>>>>> e506ca68a8ab6bd370c99c5186f027c53f50d67a
           <Button
             type="submit"
             className="w-full bg-blue-900 hover:bg-blue-800 text-white py-6 text-lg"

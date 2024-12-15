@@ -225,7 +225,11 @@ export default function Component() {
             required
             value={formData.quantity}
             onChange={handleChange}
+<<<<<<< HEAD
+            placeholder="139"
+=======
             placeholder="123"
+>>>>>>> e506ca68a8ab6bd370c99c5186f027c53f50d67a
             className="w-full p-2 rounded bg-gray-100 border border-gray-200 text-black"
           />
         </div>
