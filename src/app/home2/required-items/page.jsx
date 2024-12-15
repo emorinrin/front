@@ -53,7 +53,7 @@ export default function RequiredItems() {
           category: "Food",
         },
         {
-          name: "乾パン",
+          name: "缶詰",
           requiredQuantity: 3,
           currentQuantity: 0,
           unit: "缶",
