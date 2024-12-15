@@ -74,7 +74,7 @@ export default function WisdomHall() {
               <p className="text-gray-300 mb-4">準備はよろしいかな？</p>
               <div className="flex justify-between">
                 <Link
-                  href={`/#`}
+                  href={`#`}
                   className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                 >
                   学習を始める
