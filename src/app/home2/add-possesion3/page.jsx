@@ -1,5 +1,5 @@
 "use client";
-/* ジョーカーズのコンポーネント利用バージョン */
+/* JANコード検索API呼び出し版 */
 import { useState } from "react";
 import { Header } from "@/components/header";
 import { BottomNav } from "@/components/bottom-nav";
@@ -21,12 +21,26 @@ export default function AddPossession() {
   const [successMessage, setSuccessMessage] = useState("");
 
   // スキャン後に呼ばれる処理
-  const handleScanResult = (productName) => {
-    setFormData((prev) => ({
-      ...prev,
-      product_name: productName,
-    }));
-    setShowScanner(false); // 読み取り成功後にカメラを停止
+  const handleScanResult = async (barcode) => {
+    setBarcodeResult(barcode);
+    setShowScanner(false); // 読み取り後にカメラを停止
+
+    try {
+      // FastAPIサーバーのJANコード検索APIを呼び出す
+      const response = await fetch(
+        `${apiUrl}/api/search-product/?jan_code=${barcode}`
+      );
+      if (!response.ok) throw new Error("商品情報が見つかりませんでした。");
+
+      const data = await response.json();
+      setFormData((prev) => ({
+        ...prev,
+        product_name: data.product_name || "不明な商品",
+      }));
+    } catch (error) {
+      console.error("商品検索エラー:", error);
+      setErrorMessage("商品情報の取得に失敗しました。");
+    }
   };
 
   // カメラのトグル動作
@@ -144,7 +158,7 @@ export default function AddPossession() {
           {/* 賞味期限 */}
           <div className="space-y-2">
             <label htmlFor="expire_date" className="block text-sm">
-              賞味期限
+              賞味期限（利用期限）
             </label>
             <input
               id="expire_date"

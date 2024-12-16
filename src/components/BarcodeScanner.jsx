@@ -14,11 +14,11 @@ export default function BarcodeScanner({ onScan }) {
   const handleScan = useCallback(
     async (barcode) => {
       try {
-        console.log("スキャン成功:", barcode); // デバッグ用にバーコードをログに表示
+        console.log("スキャン成功:", barcode); // デバッグ用
 
-        // バーコードをAPIに送信して商品名を取得
+        // 修正: クエリパラメータ名を "jan_code" に変更
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/ReadStockpileInfo?barcode=${barcode}`
+          `${process.env.NEXT_PUBLIC_API_URL}/api/search-product/?jan_code=${barcode}`
         );
 
         if (!response.ok) {
@@ -30,7 +30,7 @@ export default function BarcodeScanner({ onScan }) {
         onScan(data.product_name); // 親コンポーネントに商品名を渡す
         setError(null); // エラーをクリア
       } catch (error) {
-        console.error("エラー:", error); // エラー内容をログに出力
+        console.error("エラー:", error);
         setError(error.message || "不明なエラーが発生しました");
       }
     },
