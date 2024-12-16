@@ -158,7 +158,7 @@ export default function AddPossession() {
           {/* 賞味期限 */}
           <div className="space-y-2">
             <label htmlFor="expire_date" className="block text-sm">
-              賞味期限
+              賞味期限（利用期限）
             </label>
             <input
               id="expire_date"
