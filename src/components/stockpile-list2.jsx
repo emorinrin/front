@@ -78,10 +78,11 @@ export function StockpileList2() {
   }, [items]);
 
   const categoryTitles = {
-    Drink: "飲料類",
-    Food: "食料",
+    Drink: "飲料",
+    Food: "食品",
     Energy: "エネルギー",
     Medical: "医療品",
+    Other: "その他",
   };
 
   if (error) {
