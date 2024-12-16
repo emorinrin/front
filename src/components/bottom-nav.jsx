@@ -12,8 +12,9 @@ export function BottomNav() {
     e.preventDefault();
     setIsModalOpen(true);
   };
+
   return (
-    <nav className="border-t-2 border-[#836723] bg-[#2a2a4a] py-2 sm:py-4 relative z-30">
+    <nav className="fixed bottom-0 left-0 w-full border-t-2 border-[#836723] bg-[#2a2a4a] py-2 sm:py-4 z-30">
       <div className="container mx-auto max-w-7xl">
         <div className="flex justify-around">
           <Link

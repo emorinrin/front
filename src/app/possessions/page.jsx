@@ -3,21 +3,24 @@
 import { useEffect, useState } from "react";
 
 export default function PossessionList() {
-  const [data, setData] = useState([]);
+  const [possessions, setPossessions] = useState([]);
   const [error, setError] = useState("");
 
   useEffect(() => {
-    async function fetchData() {
+    async function fetchPossessions() {
       try {
         const response = await fetch("http://localhost:8000/api/possessions");
-        if (!response.ok) throw new Error("Failed to fetch data");
-        const result = await response.json();
-        setData(result.data);
+        if (!response.ok) {
+          throw new Error("Failed to fetch possessions");
+        }
+        const data = await response.json();
+        setPossessions(data.data); // データを設定
       } catch (err) {
         setError(err.message);
       }
     }
-    fetchData();
+
+    fetchPossessions();
   }, []);
 
   return (
@@ -25,9 +28,10 @@ export default function PossessionList() {
       <h1>Possession List</h1>
       {error && <p style={{ color: "red" }}>{error}</p>}
       <ul>
-        {data.map((item) => (
+        {possessions.map((item) => (
           <li key={item.Possession_List_ID}>
-            {item.Product_Name} - {item.Expire_Date}
+            <strong>{item.Product_Name}</strong> - {item.Category} (
+            {item.Possession_count}個, 期限: {item.Expire_Date})
           </li>
         ))}
       </ul>
