@@ -29,7 +29,7 @@ export default function AddPossession() {
     try {
       // FastAPIサーバーのJANコード検索APIを呼び出す
       const response = await fetch(
-        `${apiUrl}/api/search-product/?jan_code=${barcode}`
+        `${apiUrl}/api/search-product?jan_code=${barcode}`
       );
       if (!response.ok) throw new Error("商品情報が見つかりませんでした。");
 
