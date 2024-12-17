@@ -20,7 +20,7 @@ export function HamburgerMenu() {
   const menuItems = [
     { icon: Home, label: "ホーム", href: "/home2" },
     { icon: User, label: "マイページ", href: "/home2/mypage" },
-    { icon: ListTodo, label: "備蓄品リスト", href: "/home2/stockpile-list" },
+    { icon: ListTodo, label: "備蓄品リスト", href: "/home2/stockpile-list2" },
     { icon: MessageCircle, label: "お問い合わせ", href: "/contact" },
     { icon: LogOut, label: "ログアウト", href: "/" },
   ];
