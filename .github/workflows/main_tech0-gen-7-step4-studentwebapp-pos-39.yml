@@ -18,6 +18,10 @@ jobs:
         with:
           node-version: "20.x"
 
+      - name: Clean Next.js cache
+        run: |
+          rm -rf .next
+
       - name: npm install, build, and test
         run: |
           npm install
