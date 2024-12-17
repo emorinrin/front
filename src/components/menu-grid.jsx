@@ -35,6 +35,28 @@ export function MenuGrid() {
             <span className="text-sm sm:text-base">備蓄品見積り</span>
           </Link>
           <Link
+            href="./home2/add-possesion3"
+            className="flex flex-col items-center p-4 sm:p-6 bg-[#2a2a4a] rounded-lg border-2 border-[#836723] hover:bg-[#3a3a5a] transition-colors"
+          >
+            <ListPlus className="h-8 w-8 sm:h-10 sm:w-10 text-yellow-400 mb-2" />
+            <span className="text-sm sm:text-base">備蓄品登録</span>
+          </Link>
+        </div>
+      </section>
+
+      <section>
+        <h3 className="text-lg sm:text-xl font-bold text-yellow-400 mb-3 sm:mb-4">
+          日頃から備える（デモ用）
+        </h3>
+        <div className="grid grid-cols-2 gap-4 sm:gap-6">
+          <Link
+            href="./home2/estimate"
+            className="flex flex-col items-center p-4 sm:p-6 bg-[#2a2a4a] rounded-lg border-2 border-[#836723] hover:bg-[#3a3a5a] transition-colors"
+          >
+            <Search className="h-8 w-8 sm:h-10 sm:w-10 text-yellow-400 mb-2" />
+            <span className="text-sm sm:text-base">備蓄品見積り</span>
+          </Link>
+          <Link
             href="./home2/stockpile_registration_iteminfo"
             className="flex flex-col items-center p-4 sm:p-6 bg-[#2a2a4a] rounded-lg border-2 border-[#836723] hover:bg-[#3a3a5a] transition-colors"
           >
