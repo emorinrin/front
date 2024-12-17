@@ -37,6 +37,7 @@ export function StockpileList2() {
   // アイテムデータを取得
   const fetchItems = async () => {
     try {
+      console.log(apiUrl);
       const response = await fetch(`${apiUrl}/api/possessions`);
       if (!response.ok) throw new Error("Failed to fetch stockpile data.");
       const data = await response.json();
