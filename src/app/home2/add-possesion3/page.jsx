@@ -6,6 +6,7 @@ import { BottomNav } from "@/components/bottom-nav";
 import BarcodeScanner from "@/components/BarcodeScanner";
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL; // 環境変数からAPI URLを取得
+console.log("NEXT_PUBLIC_API_URL:", process.env.NEXT_PUBLIC_API_URL);
 
 export default function AddPossession() {
   const [formData, setFormData] = useState({
