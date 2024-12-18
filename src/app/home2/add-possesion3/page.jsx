@@ -88,7 +88,7 @@ export default function AddPossession() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-[url('/35th2.jpg')] bg-cover text-white font-rpg">
+    <div className="flex flex-col min-h-screen bg-[url('/35th2.jpg')] bg-cover text-white font-rpg  pb-32">
       <Header />
       <div className="w-full max-w-lg mx-auto p-6 bg-black/60 rounded-lg shadow-lg mt-6">
         <h1 className="text-2xl font-bold mb-4 text-center">備蓄品登録</h1>

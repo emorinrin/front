@@ -157,7 +157,7 @@ export default function Component() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-[url('/35th2.jpg')] bg-cover text-white font-rpg -z-20">
+    <div className="flex flex-col min-h-screen bg-[url('/35th2.jpg')] bg-cover text-white font-rpg -z-20  pb-32">
       <Header />
       <div className="absolute inset-0 bg-black opacity-50 -z-10"></div>
       <form onSubmit={handleSubmit} className="max-w-md mx-auto p-4 space-y-4">

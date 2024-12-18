@@ -86,7 +86,7 @@ export default function AddPossession() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-[url('/35th2.jpg')] bg-cover text-white font-rpg">
+    <div className="flex flex-col min-h-screen bg-[url('/35th2.jpg')] bg-cover text-white font-rpg  pb-32">
       <Header />
       <form
         onSubmit={handleSubmit}
