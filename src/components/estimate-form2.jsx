@@ -13,6 +13,27 @@ export function EstimateForm() {
   const [loading, setLoading] = useState(false); // ローディング状態
   const [error, setError] = useState(null); // エラーメッセージ
 
+  // 必要な備蓄品リストに反映する関数
+  const handleReflectStock = async () => {
+    try {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+      const response = await fetch(`${apiUrl}/api/stock`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ items: result }),
+      });
+
+      if (!response.ok)
+        throw new Error(
+          "この機能は現在開発中です。もうしばらくお待ちください！"
+        );
+
+      alert("備蓄品リストに反映されました！");
+    } catch (error) {
+      alert(`エラー: ${error.message}`);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -20,9 +41,7 @@ export function EstimateForm() {
     setResult(null);
 
     try {
-      // 環境変数からAPIのURLを取得
       const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-
       const response = await fetch(`${apiUrl}/api/estimate`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -149,6 +168,13 @@ export function EstimateForm() {
               </li>
             ))}
           </ul>
+          {/* 必要な備蓄品リストに反映するボタン */}
+          <Button
+            onClick={handleReflectStock}
+            className="w-full mt-4 bg-green-700 hover:bg-green-600 text-white py-4 text-lg"
+          >
+            必要な備蓄品リストへ反映
+          </Button>
         </div>
       )}
     </div>
