@@ -90,122 +90,124 @@ export default function AddPossession() {
   return (
     <div className="relative flex flex-col min-h-screen bg-[url('/35th2.jpg')] bg-cover text-white font-rpg  pb-32">
       <Header />
-      <div className="absolute w-full max-w-lg mx-auto p-6 bg-black/60 rounded-lg shadow-lg mt-6">
-        <h1 className="text-2xl font-bold mb-4 text-center">備蓄品登録</h1>
+      <div className="flex-grow flex justify-center items-center">
+        <div className="absolute w-full max-w-lg mx-auto p-6 bg-black/60 rounded-lg shadow-lg mt-6">
+          <h1 className="text-2xl font-bold mb-4 text-center">備蓄品登録</h1>
 
-        {/* カメラ起動トグル */}
-        <div className="text-center mb-4">
-          <button
-            onClick={toggleScanner}
-            className="w-full p-2 bg-blue-500 hover:bg-blue-600 text-white rounded"
-          >
-            {showScanner ? "カメラを停止する" : "バーコードを読み取る"}
-          </button>
-        </div>
-
-        {/* バーコードスキャナ */}
-        {showScanner && (
-          <div className="w-full h-64 mb-4">
-            <BarcodeScanner onScan={handleScanResult} />
-          </div>
-        )}
-
-        {/* 成功・エラーメッセージ */}
-        {successMessage && (
-          <p className="text-green-500 text-center mb-2">{successMessage}</p>
-        )}
-        {errorMessage && (
-          <p className="text-red-500 text-center mb-2">{errorMessage}</p>
-        )}
-
-        {/* フォーム */}
-        <form onSubmit={handleSubmit} className="space-y-4">
-          {/* 商品名 */}
-          <div className="space-y-2">
-            <label htmlFor="product_name" className="block text-sm">
-              商品名
-            </label>
-            <input
-              id="product_name"
-              name="product_name"
-              type="text"
-              value={formData.product_name}
-              onChange={(e) =>
-                setFormData({ ...formData, product_name: e.target.value })
-              }
-              required
-              className="w-full p-2 rounded bg-gray-100 border border-gray-200 text-black"
-            />
-          </div>
-
-          {/* 数量 */}
-          <div className="space-y-2">
-            <label htmlFor="quantity" className="block text-sm">
-              数量
-            </label>
-            <input
-              id="quantity"
-              name="quantity"
-              type="number"
-              value={formData.quantity}
-              onChange={(e) =>
-                setFormData({ ...formData, quantity: e.target.value })
-              }
-              required
-              className="w-full p-2 rounded bg-gray-100 border border-gray-200 text-black"
-            />
-          </div>
-
-          {/* 賞味期限 */}
-          <div className="space-y-2">
-            <label htmlFor="expire_date" className="block text-sm">
-              賞味期限（利用期限）
-            </label>
-            <input
-              id="expire_date"
-              name="expire_date"
-              type="date"
-              value={formData.expire_date}
-              onChange={(e) =>
-                setFormData({ ...formData, expire_date: e.target.value })
-              }
-              required
-              className="w-full p-2 rounded bg-gray-100 border border-gray-200 text-black"
-            />
-          </div>
-
-          {/* カテゴリ */}
-          <div className="space-y-2">
-            <label htmlFor="category" className="block text-sm">
-              カテゴリ
-            </label>
-            <select
-              id="category"
-              name="category"
-              value={formData.category}
-              onChange={(e) =>
-                setFormData({ ...formData, category: e.target.value })
-              }
-              required
-              className="w-full p-2 rounded bg-gray-100 border border-gray-200 text-black"
+          {/* カメラ起動トグル */}
+          <div className="text-center mb-4">
+            <button
+              onClick={toggleScanner}
+              className="w-full p-2 bg-blue-500 hover:bg-blue-600 text-white rounded"
             >
-              <option value="">選択してください</option>
-              <option value="food">食品</option>
-              <option value="drink">飲料</option>
-              <option value="energy">エネルギー</option>
-              <option value="medical">医療品</option>
-              <option value="other">その他</option>
-            </select>
+              {showScanner ? "カメラを停止する" : "バーコードを読み取る"}
+            </button>
           </div>
 
-          {/* 登録ボタン */}
-          <button
-            type="submit"
-            className="w-full p-3 rounded bg-[#836723] text-white hover:bg-[#9e7d2a] transition-colors"
-          >
-            登録
-          </button>
-        </form>
+          {/* バーコードスキャナ */}
+          {showScanner && (
+            <div className="w-full h-64 mb-4">
+              <BarcodeScanner onScan={handleScanResult} />
+            </div>
+          )}
+
+          {/* 成功・エラーメッセージ */}
+          {successMessage && (
+            <p className="text-green-500 text-center mb-2">{successMessage}</p>
+          )}
+          {errorMessage && (
+            <p className="text-red-500 text-center mb-2">{errorMessage}</p>
+          )}
+
+          {/* フォーム */}
+          <form onSubmit={handleSubmit} className="space-y-4">
+            {/* 商品名 */}
+            <div className="space-y-2">
+              <label htmlFor="product_name" className="block text-sm">
+                商品名
+              </label>
+              <input
+                id="product_name"
+                name="product_name"
+                type="text"
+                value={formData.product_name}
+                onChange={(e) =>
+                  setFormData({ ...formData, product_name: e.target.value })
+                }
+                required
+                className="w-full p-2 rounded bg-gray-100 border border-gray-200 text-black"
+              />
+            </div>
+
+            {/* 数量 */}
+            <div className="space-y-2">
+              <label htmlFor="quantity" className="block text-sm">
+                数量
+              </label>
+              <input
+                id="quantity"
+                name="quantity"
+                type="number"
+                value={formData.quantity}
+                onChange={(e) =>
+                  setFormData({ ...formData, quantity: e.target.value })
+                }
+                required
+                className="w-full p-2 rounded bg-gray-100 border border-gray-200 text-black"
+              />
+            </div>
+
+            {/* 賞味期限 */}
+            <div className="space-y-2">
+              <label htmlFor="expire_date" className="block text-sm">
+                賞味期限（利用期限）
+              </label>
+              <input
+                id="expire_date"
+                name="expire_date"
+                type="date"
+                value={formData.expire_date}
+                onChange={(e) =>
+                  setFormData({ ...formData, expire_date: e.target.value })
+                }
+                required
+                className="w-full p-2 rounded bg-gray-100 border border-gray-200 text-black"
+              />
+            </div>
+
+            {/* カテゴリ */}
+            <div className="space-y-2">
+              <label htmlFor="category" className="block text-sm">
+                カテゴリ
+              </label>
+              <select
+                id="category"
+                name="category"
+                value={formData.category}
+                onChange={(e) =>
+                  setFormData({ ...formData, category: e.target.value })
+                }
+                required
+                className="w-full p-2 rounded bg-gray-100 border border-gray-200 text-black"
+              >
+                <option value="">選択してください</option>
+                <option value="food">食品</option>
+                <option value="drink">飲料</option>
+                <option value="energy">エネルギー</option>
+                <option value="medical">医療品</option>
+                <option value="other">その他</option>
+              </select>
+            </div>
+
+            {/* 登録ボタン */}
+            <button
+              type="submit"
+              className="w-full p-3 rounded bg-[#836723] text-white hover:bg-[#9e7d2a] transition-colors"
+            >
+              登録
+            </button>
+          </form>
+        </div>
       </div>
       <BottomNav />
     </div>
