@@ -11,7 +11,7 @@ import { AchievementBadges } from "@/components/achievement-badges";
 
 export default function MyPage() {
   return (
-    <div className="relative flex flex-col min-h-screen">
+    <div className="relative flex flex-col min-h-screen  pb-32">
       <div className="fixed inset-0 bg-[url('/35th2.jpg')] bg-cover"></div>
       <div className="fixed inset-0 bg-black opacity-50"></div>
       <div className="relative z-10 flex flex-col min-h-screen">
