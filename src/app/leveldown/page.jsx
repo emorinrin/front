@@ -46,7 +46,7 @@ export default function LevelUp() {
   };
 
   return (
-    <div className="relative flex flex-col min-h-screen text-white font-rpg bg-[url('/35th2.jpg')] bg-cover  pb-32">
+    <div className="relative flex flex-col min-h-screen text-white font-rpg bg-[url('/hoshi4.jpg')] bg-cover  pb-32">
       <div className="absolute inset-0 bg-black opacity-50"></div>
       {/* 背景装飾 */}
       <BackgroundDecoration />
