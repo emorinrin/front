@@ -44,7 +44,7 @@ export function MenuGrid() {
         </div>
       </section>
 
-      <section>
+      {/*  <section>
         <h3 className="text-lg sm:text-xl font-bold text-yellow-400 mb-3 sm:mb-4">
           日頃から備える（デモ用）
         </h3>
@@ -64,7 +64,7 @@ export function MenuGrid() {
             <span className="text-sm sm:text-base">備蓄品登録</span>
           </Link>
         </div>
-      </section>
+      </section>*/}
 
       <section>
         <h3 className="text-lg sm:text-xl font-bold text-yellow-400 mb-3 sm:mb-4">

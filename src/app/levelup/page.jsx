@@ -45,7 +45,7 @@ export default function LevelUp() {
   };
 
   return (
-    <div className="relative flex flex-col min-h-screen text-white font-rpg bg-[url('/35th2.jpg')] bg-cover  pb-32">
+    <div className="relative flex flex-col min-h-screen text-white font-rpg bg-[url('/luida3.jpg')] bg-cover  pb-32">
       <div className="absolute inset-0 bg-black opacity-50"></div>
       {/* 背景装飾 */}
       <BackgroundDecoration />
@@ -80,7 +80,7 @@ export default function LevelUp() {
 
         {/* コンテンツ */}
         <div className="bg-black bg-opacity-70 rounded-lg p-6 text-center max-w-lg w-full drop-shadow-md">
-          <p className="text-lg mb-2">ガスコンロを てにいれた！</p>
+          <p className="text-lg mb-2">びちくひんを てにいれた！</p>
           <p className="text-lg font-bold">勇者は レベル10に あがった！</p>
         </div>
       </main>
