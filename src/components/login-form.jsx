@@ -88,16 +88,13 @@ export function LoginForm() {
           </Button>
         </form>
         <div className="mt-4 text-center text-sm">
-          <Link
-            href="/forgot-password"
-            className="text-yellow-400 hover:underline"
-          >
+          <Link href="#" className="text-yellow-400 hover:underline">
             呪文を忘れてしまった？
           </Link>
         </div>
         <div className="mt-2 text-center text-sm">
           <span className="text-gray-400">新しい冒険者ですか？</span>{" "}
-          <Link href="/register" className="text-yellow-400 hover:underline">
+          <Link href="#" className="text-yellow-400 hover:underline">
             冒険者登録
           </Link>
         </div>

@@ -21,7 +21,7 @@ export function HamburgerMenu() {
     { icon: Home, label: "ホーム", href: "/home2" },
     { icon: User, label: "マイページ", href: "/home2/mypage" },
     { icon: ListTodo, label: "備蓄品リスト", href: "/home2/stockpile-list2" },
-    { icon: MessageCircle, label: "お問い合わせ", href: "/contact" },
+    { icon: MessageCircle, label: "お問い合わせ", href: "#" },
     { icon: LogOut, label: "ログアウト", href: "/" },
   ];
 
