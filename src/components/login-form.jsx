@@ -38,7 +38,7 @@ export function LoginForm() {
               htmlFor="username"
               className="block text-sm font-medium text-gray-300 mb-1"
             >
-              冒険者の名前
+              冒険者の名前（デモID：hero）
             </label>
             <div className="relative">
               <Scroll
@@ -61,7 +61,7 @@ export function LoginForm() {
               htmlFor="password"
               className="block text-sm font-medium text-gray-300 mb-1"
             >
-              復活の呪文
+              復活の呪文（デモパスワード：dragon）
             </label>
             <div className="relative">
               <Lock
