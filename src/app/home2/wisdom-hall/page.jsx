@@ -16,25 +16,25 @@ export default function WisdomHall() {
       id: "basics",
       title: "防災入門",
       icon: Book,
-      description: "災害の種類と基本的な対策を学ぶ",
+      description: "まずはここからはじめよう！",
     },
     {
       id: "recovery",
       title: "日常の習慣でできる防災",
-      icon: Award,
-      description: "災害後の生活再建と地域の回復",
+      icon: Scroll,
+      description: "ちょっとの工夫で役立つ知恵だ！",
     },
     {
       id: "preparation",
       title: "出かけたついでにできる防災",
       icon: Scroll,
-      description: "災害に備えるための準備方法",
+      description: "ローリングストックについて学ぼう！",
     },
     {
       id: "action",
       title: "災害時の行動",
       icon: Swords,
-      description: "災害発生時の適切な対応",
+      description: "しっかり練習しておこう！",
     },
   ];
 

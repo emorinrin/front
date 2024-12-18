@@ -1,6 +1,7 @@
 "use client";
 /* JANコード検索API呼び出し版 */
 import { useState } from "react";
+import { useRouter } from "next/navigation"; // useRouterフックをインポート
 import { Header } from "@/components/header";
 import { BottomNav } from "@/components/bottom-nav";
 import BarcodeScanner from "@/components/BarcodeScanner";
@@ -20,6 +21,7 @@ export default function AddPossession() {
   const [barcodeResult, setBarcodeResult] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const router = useRouter(); // useRouterフックの初期化
 
   // スキャン後に呼ばれる処理
   const handleScanResult = async (barcode) => {
@@ -81,6 +83,11 @@ export default function AddPossession() {
         expire_date: "",
         category: "",
       });
+
+      // 数秒後に画面遷移
+      setTimeout(() => {
+        router.push("/levelup"); // 遷移先のURLを指定
+      }, 1000); // 2秒後に遷移
     } catch (error) {
       console.error("送信エラー:", error);
       setErrorMessage(`エラーが発生しました: ${error.message}`);
