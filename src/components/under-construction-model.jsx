@@ -11,7 +11,10 @@ export function UnderConstructionModal({ isOpen, onClose }) {
       <div className="bg-[#2a2a4a] border-2 border-[#836723] rounded-lg p-6 max-w-sm w-full mx-4">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-bold text-yellow-400">工事中</h2>
-          <button onClick={onClose} className="text-gray-400 hover:text-white">
+          <button
+            onClick={onClose}
+            className="text-gray-400 hover:text-white z-50"
+          >
             <X size={24} />
           </button>
         </div>
