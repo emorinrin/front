@@ -178,7 +178,7 @@ export function StockpileList2() {
               </Link>
               {editingItem?.Possession_List_ID === item.Possession_List_ID ? (
                 <button
-                  onClick={handleUpdate}
+                  onClick={() => handleUpdate(item.Possession_List_ID)}
                   className="bg-blue-500 text-white px-4 py-2 rounded"
                 >
                   保存
